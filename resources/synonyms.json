@@ -1,0 +1,24 @@
+{
+    "data": {
+        "synonyms": [
+            "i-pod, i pod => ipod",
+            "universe, cosmos",
+            "pleuronectidae, flounder, bothidae, citharidae",
+            "tonguefish, cynoglossidae",
+            "soleidae","sole",
+            "scophthalmidae", "turbot",
+            "oncorhynchus kisutch", "coho salmon", "silver salmon",
+            "oncorhynchus keta", "chum salmon", "dog salmon",
+            "oncorhynchus tschawytscha", "chinook salmon", "king salmon",
+            "huchen", "hucho hucho",
+            "salmonidae", "salmon",
+            "oncorhynchus gorbuscha", "pink salmon", "humpback salmon", "humpie salmon",
+            "oncorhynchus mykiss", "rainbow trout",
+            "oncorhynchus clarkii", "cutthroat trout",
+            "oncorhynchus aguabonita", "golden trout",
+            "oncorhynchus gilae", "gila trout",
+            "oncorhynchus apache", "apache trout",
+            "oncorhynchus chrysogaster", "mexican golden trout"
+        ]
+    }
+}
