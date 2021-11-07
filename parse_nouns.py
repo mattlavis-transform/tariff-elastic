@@ -7,7 +7,7 @@ g.get_wordnet_lexicographer_files()
 g.open_csvs()
 
 filename = "resources/wordnet/data.noun.partial"
-# filename = "resources/wordnet/data.noun"
+filename = "resources/wordnet/data.noun"
 wordnet_lines = []
 
 synsets = []
@@ -18,6 +18,6 @@ with open(filename) as infile:
         if wordnet_line.valid:
             synsets.append(wordnet_line.json)
         
-f = open("out.json", "w")
-json.dump(synsets, f, indent=4)
-f.close()
+# f = open("out.json", "w")
+# json.dump(synsets, f, indent=4)
+# f.close()

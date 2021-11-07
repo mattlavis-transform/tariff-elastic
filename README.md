@@ -13,5 +13,10 @@
 
 ## Usage
 
-### To parse an existing electronic Tariff file:
+### To create the NDJSON data
 `python3 emulate.py`
+
+
+### To import data into Elasticsearch
+`./es_import`
+

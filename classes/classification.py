@@ -25,7 +25,7 @@ class Classification(object):
 
         self.get_class()
         self.get_friendly()
-        self.get_assignments()
+        # self.get_assignments()
         self.format_description()
 
     def format_description(self):
@@ -109,7 +109,7 @@ class Classification(object):
         
     def get_search_references_old(self, search_references):
         for search_reference in search_references:
-            if search_reference.referenced_id == self.goods_nomenclature_item_id:
+            if search_reference.goods_nomenclature_item_id == self.goods_nomenclature_item_id:
                 self.search_references.append(search_reference.title)
 
     def get_chapter_heading(self):
@@ -126,7 +126,7 @@ class Classification(object):
     def write(self, dest_folder):
         self.filename = os.path.join(dest_folder, self.goods_nomenclature_item_id + self.productline_suffix + ".json")
         self.json = {}
-        self.json["id"] = self.goods_nomenclature_item_id + self.productline_suffix
+        # self.json["id"] = self.goods_nomenclature_item_id + self.productline_suffix
         self.json["sid"] = self.sid
         self.json["goods_nomenclature_item_id"] = self.goods_nomenclature_item_id
         self.json["productline_suffix"] = self.productline_suffix
@@ -145,9 +145,11 @@ class Classification(object):
         for i in range (0, 12):
             if len(self.hierarchy) > i:
                 self.json["ancestor_" + str(i)] = self.hierarchy[i]
-        self.json["search_references"] = self.search_references
-        self.json["terms"] = self.terms
-        self.json["terms_hierarchy"] = self.terms_hierarchy
+                
+        if 1 > 2:
+            self.json["search_references"] = self.search_references
+            self.json["terms"] = self.terms
+            self.json["terms_hierarchy"] = self.terms_hierarchy
 
         with open(self.filename, 'w') as outfile:
             json.dump(self.json, outfile, indent=4)

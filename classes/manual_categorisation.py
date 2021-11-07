@@ -96,6 +96,5 @@ class Assignment:
         self.json["goods_nomenclature_sid"] = self.goods_nomenclature_sid
         self.json["goods_nomenclature_item_id"] = self.goods_nomenclature_item_id
         self.json["productline_suffix"] = self.productline_suffix
-        self.json["filter_name"] = self.filter_name
+        self.json["filter_name"] = "filter_" + self.filter_name
         self.json["value"] = self.value
-        

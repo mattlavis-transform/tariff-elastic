@@ -1,5 +1,6 @@
 import os
 import sys
+import fileinput
 import csv
 import json
 import ndjson
@@ -15,10 +16,12 @@ import classes.globals as g
 class Application(object):
     def __init__(self):
         load_dotenv('.env')
+        self.include_search_refs = int(os.getenv('INCLUDE_SEARCH_REFS'))
         self.source_file = os.path.join(os.getcwd(), "resources", os.getenv('SOURCE_FILE'))
         self.dest_folder = os.path.join(os.getcwd(), "resources", "json")
         self.stopwords_file = os.path.join(os.getcwd(), "resources", os.getenv('STOPWORDS_FILE'))
         self.synonyms_file = os.path.join(os.getcwd(), "resources", os.getenv('SYNONYMS_FILE'))
+        self.commodities_filename = os.path.join("resources", "ndjson", "commodities.ndjson")
         
         self.load_manual_categorisation()
         self.load_synonyms()
@@ -28,11 +31,18 @@ class Application(object):
         
         self.load_stopwords()
         self.load_data()
+        self.inherit_assignments()
+        self.assign_assignments_to_commodities()
         self.get_hierarchy_and_siblings()
         self.get_others()
         self.process_data()
         self.write_data()
+        self.post_process()
         self.complete()
+        
+    def assign_assignments_to_commodities(self):
+        for c in self.classifications:
+            c.get_assignments()
         
     def get_friendly_names(self):
         with open('/Users/mattlavis/sites and projects/1. Online Tariff/scrape-tariff-number/tns.ndjson') as f:
@@ -52,7 +62,21 @@ class Application(object):
                 else:
                     g.assignments[sid] = [item]
 
-            a = 1
+    def inherit_assignments(self):
+        for i in range(0, len(self.classifications)):
+            c = self.classifications[i]
+            sid = c.sid
+            if sid in g.assignments:
+                a = 1
+                for j in range(i + 1, len(self.classifications)):
+                    c2 = self.classifications[j]
+                    if c2.indent <= c.indent:
+                        break
+                    else:
+                        if c2.sid not in g.assignments:
+                            g.assignments[c2.sid] = g.assignments[c.sid]
+                    pass
+        a = 1
 
     def load_manual_categorisation(self):
         self.manual_categorisation = ManualCategorisation()
@@ -70,13 +94,13 @@ class Application(object):
             for item in data:
                 search_reference = SearchReference(item)
                 self.search_references.append(search_reference)
-                if search_reference.referenced_id in self.search_references_dict:
-                    self.search_references_dict[search_reference.referenced_id].append(search_reference.title)
+                if search_reference.goods_nomenclature_item_id in self.search_references_dict:
+                    self.search_references_dict[search_reference.goods_nomenclature_item_id].append(search_reference.title)
                 else:
-                    self.search_references_dict[search_reference.referenced_id] = [search_reference.title]
-            print(letter)
+                    self.search_references_dict[search_reference.goods_nomenclature_item_id] = [search_reference.title]
+            print("Deriving curated terms beginning with", letter)
         # Sort the search references
-        self.search_references = sorted(self.search_references, key=lambda x: int(x.referenced_id))
+        self.search_references = sorted(self.search_references, key=lambda x: int(x.goods_nomenclature_item_id))
         # self.search_references_dict = sorted(self.search_references_dict)
         a = 1
 
@@ -97,8 +121,7 @@ class Application(object):
             synonym = Synonym(synonym_raw)
             self.synonyms.append(synonym)
         self.create_synonym_dictionary()
-        a = 1
-        
+
     def create_synonym_dictionary(self):
         self.synonyms_dict = {}
         for synonym in self.synonyms:
@@ -111,8 +134,8 @@ class Application(object):
                             else:
                                 self.synonyms_dict[term] = [term2]
                                 
-        with open('file.txt', 'w') as file:
-            file.write(json.dumps(self.synonyms_dict, indent=4))
+        # with open('file.txt', 'w') as file:
+        #     file.write(json.dumps(self.synonyms_dict, indent=4))
 
     def load_data(self):
         self.classifications = []
@@ -124,7 +147,7 @@ class Application(object):
                     classification = Classification(row)
                     self.classifications.append(classification)
                 line_count += 1
-            print(f'Processed {line_count} lines.')
+            print(f'Processed {line_count} lines of the goods classification.')
 
     def get_hierarchy_and_siblings(self):
         starting_point = "2300000000"
@@ -192,20 +215,44 @@ class Application(object):
             classification.get_search_references(self.search_references_dict)
 
     def write_data(self):
-        loop = 1
         ndjson_list = []
+        ndjson_list2 = []
         for classification in self.classifications:
             classification.get_chapter_heading()
             classification.write(self.dest_folder)
             ndjson_list.append(classification.json)
-            loop += 1
-            if loop > 50000:
-            # if loop > 6000:
-                break
                 
-        with open('backup.ndjson', 'w') as f:
+        for search_reference in self.search_references:
+            ndjson_list2.append(search_reference.json)
+                
+        try:
+            os.remove(self.commodities_filename)
+        except:
+            pass
+        
+        with open(self.commodities_filename, 'w') as f:
+            f.write('\n')
             ndjson.dump(ndjson_list, f)
+            if self.include_search_refs == 1:
+                f.write("\n")
+                ndjson.dump(ndjson_list2, f)
+
+    def post_process(self):
+        filename = self.commodities_filename
+        with fileinput.FileInput(filename, inplace=True, backup='.bak') as f:
+            # print( '{ "index": {} }\n')
+            for line in f:
+                text_to_search = "\n"
+                replacement_text = '\n{ "index": {} }\n'
+                print(line.replace(text_to_search, replacement_text), end='')
+                
+        f.close()
+        
+        with open(self.commodities_filename, 'a') as f:
+            f.write("\n")
+        f.close()
         
 
+
     def complete(self):
-        print("Complete")
+        print("Generation of commodities.ndjson complete")
