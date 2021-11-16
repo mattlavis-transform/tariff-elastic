@@ -1,18 +1,44 @@
-import sys
+import os
 from classes.database import Database
+from dotenv import load_dotenv
 import classes.globals as g
 
+
+class WordNet(object):
+    def __init__(self):
+        pass
+    
+    def clear(self):
+        self.clear_synsets()
+        self.clear_terms()
+        
+    def clear_synsets(self):
+        d = Database()
+        sql = "DELETE FROM wordnet.synsets"
+        d.run_query(sql)
+        
+    def clear_terms(self):
+        d = Database()
+        sql = "DELETE FROM wordnet.terms"
+        d.run_query(sql)
+
 class WordnetLine(object):
-    def __init__(self, raw):
+    def __init__(self, wordnet, raw):
+        load_dotenv('.env')
+        self.save_to_db_concurrent = int(os.getenv('SAVE_TO_DB_CONCURRENT'))
+        self.wordnet = wordnet
+
         a = g.pointer_symbols
         self.raw = raw
         self.wordnet_words = []
         self.wordnet_relations = []
         self.valid = False
+        self.description = ""
         
         self.parse()
         self.parse_description()
         self.form_json()
+        self.save()
 
     def parse(self):
         self.parts = self.raw.split(" ")
@@ -85,21 +111,22 @@ class WordnetLine(object):
         g.f_wordnet_synset_file.write("\n")
     
     def save(self):
-        d = Database()
-        sql = """
-        INSERT INTO wordnet.synsets
-        (synset_offset, lex_filenum, ss_type, word_count, description)
-        VALUES
-        (%s, %s, %s, %s, %s)
-        """
-        params = [
-            self.synset_offset,
-            self.lex_filenum,
-            self.ss_type,
-            self.word_count,
-            self.description
-        ]
-        d.run_query(sql, params)
+        if self.save_to_db_concurrent:
+            d = Database()
+            sql = """
+            INSERT INTO wordnet.synsets
+            (synset_offset, lex_filenum, ss_type, word_count, description)
+            VALUES
+            (%s, %s, %s, %s, %s)
+            """
+            params = [
+                self.synset_offset,
+                self.lex_filenum,
+                self.ss_type,
+                self.word_count,
+                self.description
+            ]
+            d.run_query(sql, params)
 
 
 class WordnetTerm(object):

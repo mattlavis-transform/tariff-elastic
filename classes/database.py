@@ -29,7 +29,7 @@ class Database:
 
     def run_query(self, query, params = None):
         """Run a SQL query."""
-        return
+        # return
         try:
             self.open_connection()
             with self.conn.cursor() as cur:

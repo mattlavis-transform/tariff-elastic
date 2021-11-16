@@ -34,7 +34,8 @@ class Application(object):
         self.inherit_assignments()
         self.assign_assignments_to_commodities()
         self.get_hierarchy_and_siblings()
-        self.get_others()
+        self.get_others_staged()
+        # self.get_others()
         self.process_data()
         self.write_data()
         self.post_process()
@@ -85,7 +86,6 @@ class Application(object):
         self.search_references = []
         self.search_references_dict = {}
         alphabet = "abcdefghijklmnopqrstuvwxyz"
-        # alphabet = "x"
         for i in range(0, len(alphabet)):
             letter = alphabet[i:i+1]
             url = "https://www.trade-tariff.service.gov.uk/api/v2/search_references.json?query[letter]=" + letter
@@ -99,14 +99,13 @@ class Application(object):
                 else:
                     self.search_references_dict[search_reference.goods_nomenclature_item_id] = [search_reference.title]
             print("Deriving curated terms beginning with", letter)
-        # Sort the search references
+
         self.search_references = sorted(self.search_references, key=lambda x: int(x.goods_nomenclature_item_id))
-        # self.search_references_dict = sorted(self.search_references_dict)
-        a = 1
 
     def load_stopwords(self):
         f = open(self.stopwords_file)
         self.stopwords = json.load(f)
+        g.stopwords = self.stopwords
         f.close()
         
     def load_synonyms(self):
@@ -150,7 +149,6 @@ class Application(object):
             print(f'Processed {line_count} lines of the goods classification.')
 
     def get_hierarchy_and_siblings(self):
-        starting_point = "2300000000"
         starting_point = "9999999999"
 
         for i in range(len(self.classifications) - 1, -1, -1):
@@ -163,6 +161,8 @@ class Application(object):
                     if antecedent.indent < indent or antecedent.classification_class == "chapter":
                         indent = antecedent.indent
                         classification.hierarchy.append(g.cleanse(antecedent.description))
+                        antecedent.description = g.cleanse(antecedent.description)
+                        classification.full_hierarchy.append(antecedent)
                         can_find_siblings = False
 
                     if can_find_siblings:
@@ -172,6 +172,8 @@ class Application(object):
 
                     if antecedent.indent == 0 and antecedent.classification_class == "chapter":
                         break
+            
+            classification.get_full_hierarchy_json()        
 
     def get_others(self):
         for classification in self.classifications:
@@ -207,7 +209,52 @@ class Application(object):
                             else:
                                 classification.description_alternative += ", "
                         classification.description_alternative += g.decapitalize(sib)
-                a = 1
+
+    def get_others_staged(self):
+        # Do this, looping through the hierarchy 1 by 1, starting at indent of subheadings
+        # (there are no others higher than that)
+        for indent in range(1, 13):
+            for classification in self.classifications:
+                if classification.indent == indent:
+                    # if "other" in classification.description.lower().strip(): # == "other":
+                    if classification.description.lower().strip() == "other":
+                        # Check for live horses, asses, mules and hinnies
+                        ret = classification.check_parent_of_other()
+                        if ret != "":
+                            classification.description_alternative = ret
+                        else:
+                            classification.siblings.reverse()
+                            sibling_count = len(classification.siblings)
+                            if sibling_count == 1:
+                                if "less than" in classification.siblings[0].lower():
+                                    classification.description_alternative = classification.siblings[0].replace("less than ", "") + " or more"
+                                elif " or " in classification.siblings[0].lower():
+                                    classification.description_alternative = "Neither " + g.decapitalize(classification.siblings[0].replace(" or ", " nor "))
+                                else:
+                                    classification.description_alternative = "Not " + g.decapitalize(classification.siblings[0])
+                            elif sibling_count == 2:
+                                classification.description_alternative = "Neither "
+                                sibling_index = 0
+                                for sib in classification.siblings:
+                                    sibling_index += 1
+                                    if sibling_index > 1:
+                                        if sibling_index == sibling_count:
+                                            classification.description_alternative += " nor "
+                                        else:
+                                            classification.description_alternative += ", "
+                                    classification.description_alternative += g.decapitalize(sib)
+                            else:
+                                classification.description_alternative = "Not "
+                                sibling_index = 0
+                                for sib in classification.siblings:
+                                    sibling_index += 1
+                                    if sibling_index > 1:
+                                        if sibling_index == sibling_count:
+                                            classification.description_alternative += " or "
+                                        else:
+                                            classification.description_alternative += ", "
+                                    classification.description_alternative += g.decapitalize(sib)
+                        a = 1
 
     def process_data(self):
         for classification in self.classifications:

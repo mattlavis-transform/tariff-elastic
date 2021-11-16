@@ -4,24 +4,60 @@
             "analysis": {
                 "analyzer": {
                     "complex_synonyms": {
-                        "tokenizer": "whitespace",
+                        "tokenizer": "keyword",
                         "filter": [
+                            "asciifolding",
+                            "lowercase",
+                            "english_stemmer",
+                            "synonyms_drugs",
                             "synonyms_generic",
                             "synonyms_trees",
+                            "synonyms_food",
                             "synonyms_flowers",
-                            "synonyms_cheeses"
+                            "synonyms_cheeses",
+                            "my_en_US_dict_stemmer"
                         ]
                     },
-                    "trigram": {
-                        "type": "custom",
+                    "english": {
                         "tokenizer": "standard",
                         "filter": [
-                            "shingle",
-                            "lowercase"
+                            "english_possessive_stemmer",
+                            "lowercase",
+                            "english_stop",
+                            "english_stemmer"
+                        ]
+                    },
+                    "my_hunspell": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "my_en_US_dict_stemmer"
                         ]
                     }
                 },
                 "filter": {
+                    "english_stop": {
+                        "type": "stop",
+                        "stopwords": "_english_"
+                    },
+                    "english_stemmer": {
+                        "type": "stemmer",
+                        "language": "english"
+                    },
+                    "english_possessive_stemmer": {
+                        "type": "stemmer",
+                        "language": "possessive_english"
+                    },
+                    "my_en_US_dict_stemmer": {
+                        "type": "hunspell",
+                        "locale": "en_US",
+                        "dedup": false
+                    },
+                    "synonyms_drugs": {
+                        "type": "synonym",
+                        "synonyms_path": "synonyms_drugs.txt",
+                        "ignore_case": true,
+                        "updateable": true
+                    },
                     "synonyms_generic": {
                         "type": "synonym",
                         "synonyms_path": "synonyms_generic.txt",
@@ -46,10 +82,11 @@
                         "ignore_case": true,
                         "updateable": true
                     },
-                    "shingle": {
-                        "type": "shingle",
-                        "min_gram_size": 2,
-                        "max_gram_size": 3
+                    "synonyms_food": {
+                        "type": "synonym",
+                        "synonyms_path": "synonyms_food.txt",
+                        "ignore_case": true,
+                        "updateable": true
                     }
                 }
             }
@@ -69,104 +106,155 @@
             "productline_suffix": {
                 "type": "text"
             },
+            "validity_start_date": {
+                "type": "text"
+            },
+            "validity_end_date": {
+                "type": "text"
+            },
             "chapter": {
+                "analyzer": "english",
                 "type": "text"
             },
             "heading": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_0": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_1": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_10": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_11": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_2": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_3": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_4": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_5": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_6": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_7": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_8": {
+                "analyzer": "english",
                 "type": "text"
             },
             "ancestor_9": {
+                "analyzer": "english",
                 "type": "text"
             },
             "class": {
+                "analyzer": "english",
                 "type": "text"
             },
             "description": {
-                "type": "text",
-                "fields": {
-                    "trigram": {
-                        "type": "text",
-                        "analyzer": "trigram"
-                    }
-                }
+                "analyzer": "english",
+                "type": "text"
             },
             "promoted_description": {
-                "type": "text",
-                "fields": {
-                    "trigram": {
-                        "type": "text",
-                        "analyzer": "trigram"
-                    }
-                }
+                "analyzer": "english",
+                "type": "text"
             },
             "description_alternative": {
+                "analyzer": "english",
                 "type": "text"
             },
             "friendly_name": {
+                "analyzer": "english",
                 "type": "text"
             },
             "search_references": {
+                "analyzer": "english",
                 "type": "text"
             },
             "terms": {
+                "analyzer": "english",
                 "type": "text"
             },
             "terms_hierarchy": {
+                "analyzer": "english",
                 "type": "text"
             },
             "filter_animal_product_state": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "filter_animal_type": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "filter_bone_state": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "filter_cheese_type": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "filter_egg_state": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "filter_fat_content": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "filter_milk_preparation": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             }
         }
     }
