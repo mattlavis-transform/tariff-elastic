@@ -1,5 +1,17 @@
 clear
 
+echo "Copying synonyms"
+cd "../../7. OTT elastic/elk"
+./copy_synonyms
+
+echo "Collecting latest taxonomy"
+cd "../../1. Online Tariff/auto-taxonomise-tariff"
+python3 taxon.py
+
+echo "Writing commodity code file"
+cd "../emulate-ts"
+python3 emulate.py
+
 # Delete the index
 echo "Deleting elasticsearch index"
 curl -H 'Content-Type: application/json' -XDELETE 'http://localhost:9200/commodities'

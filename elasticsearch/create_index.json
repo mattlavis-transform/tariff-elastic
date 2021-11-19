@@ -6,6 +6,7 @@
                     "complex_synonyms": {
                         "tokenizer": "keyword",
                         "filter": [
+                            "stem_exclusions",
                             "asciifolding",
                             "lowercase",
                             "english_stemmer",
@@ -21,6 +22,7 @@
                     "english": {
                         "tokenizer": "standard",
                         "filter": [
+                            "stem_exclusions",
                             "english_possessive_stemmer",
                             "lowercase",
                             "english_stop",
@@ -35,6 +37,10 @@
                     }
                 },
                 "filter": {
+                    "stem_exclusions": {
+                        "type": "keyword_marker",
+                        "keywords_path": "stem_exclusions.txt"
+                    },
                     "english_stop": {
                         "type": "stop",
                         "stopwords": "_english_"
@@ -117,8 +123,16 @@
                 "type": "text"
             },
             "heading": {
-                "analyzer": "english",
-                "type": "text"
+                "type": "text",
+                "analyzer": "english"
+            },
+            "heading_id": {
+                "type": "text",
+                "analyzer": "english"
+            },
+            "chapter_id": {
+                "type": "text",
+                "analyzer": "english"
             },
             "ancestor_0": {
                 "analyzer": "english",
@@ -208,6 +222,14 @@
                     }
                 }
             },
+            "filter_animal_purpose": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
             "filter_animal_type": {
                 "type": "text",
                 "fields": {
@@ -224,6 +246,30 @@
                     }
                 }
             },
+            "filter_bread_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_brix_value": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_cereal_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
             "filter_cheese_type": {
                 "type": "text",
                 "fields": {
@@ -232,7 +278,39 @@
                     }
                 }
             },
-            "filter_egg_state": {
+            "filter_cocoa_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_coffee_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_dairy_form": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_egg_purpose": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_egg_shell_state": {
                 "type": "text",
                 "fields": {
                     "raw": {
@@ -248,7 +326,215 @@
                     }
                 }
             },
+            "filter_fish_classification": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_fish_preparation": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_flour_source": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_fruit_spirit": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_fruit_vegetable_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_fruit_vegetable_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_jam_ingredient": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_jam_sugar_content": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_juice_ingredient": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_margarine_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
             "filter_milk_preparation": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_nut_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_oil_fat_source": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_pasta_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_plant_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_sheep_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_sugar_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_yeast_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_beverage_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_wine_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_alcohol_volume": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_wine_origin": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_tobacco_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_clothing_gender": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_garment_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_garment_material": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_computer_type": {
                 "type": "text",
                 "fields": {
                     "raw": {

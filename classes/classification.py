@@ -167,10 +167,12 @@ class Classification(object):
             self.description_alternative = self.description
         
         self.filename = os.path.join(dest_folder, self.goods_nomenclature_item_id + self.productline_suffix + ".json")
+
         self.json = {}
-        # self.json["id"] = self.goods_nomenclature_item_id + self.productline_suffix
         self.json["sid"] = self.sid
         self.json["goods_nomenclature_item_id"] = self.goods_nomenclature_item_id
+        self.json["heading_id"] = self.goods_nomenclature_item_id[0:4]
+        self.json["chapter_id"] = self.goods_nomenclature_item_id[0:2]
         self.json["productline_suffix"] = self.productline_suffix
         self.json["class"] = self.classification_class
         self.json["description"] = self.description

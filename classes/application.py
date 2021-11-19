@@ -16,6 +16,7 @@ import classes.globals as g
 class Application(object):
     def __init__(self):
         load_dotenv('.env')
+        self.auto_taxon_file = os.getenv('AUTO_TAXON_FILE')
         self.include_search_refs = int(os.getenv('INCLUDE_SEARCH_REFS'))
         self.source_file = os.path.join(os.getcwd(), "resources", os.getenv('SOURCE_FILE'))
         self.dest_folder = os.path.join(os.getcwd(), "resources", "json")
@@ -23,12 +24,12 @@ class Application(object):
         self.synonyms_file = os.path.join(os.getcwd(), "resources", os.getenv('SYNONYMS_FILE'))
         self.commodities_filename = os.path.join("resources", "ndjson", "commodities.ndjson")
         
-        self.load_manual_categorisation()
+        # self.load_manual_categorisation() # This is for the abandoned manual classification
         self.load_synonyms()
         self.get_search_references()
         self.get_friendly_names()
         self.get_assignments()
-        
+
         self.load_stopwords()
         self.load_data()
         self.inherit_assignments()
@@ -53,7 +54,7 @@ class Application(object):
                 g.friendly_names[item["heading"].ljust(10, "0")] = item["description"]
 
     def get_assignments(self):
-        with open('assignments.ndjson') as f:
+        with open(self.auto_taxon_file) as f:
             assignments = ndjson.load(f)
             g.assignments = {}
             for item in assignments:
