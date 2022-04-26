@@ -20,6 +20,3 @@ class SearchReference(object):
         self.json["class"] = self.referenced_class
         self.json["description"] = self.promoted_description
         self.json["promoted_description"] = self.promoted_description
-        
-    # Might need to do a look up of the parentage
-    

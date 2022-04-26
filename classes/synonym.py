@@ -18,7 +18,5 @@ class Synonym(object):
             parts = self.raw.split(",")
             for part in parts:
                 self.terms.append(part.strip())
-                
-        # "i-pod, i pod => ipod",
-        # "universe, cosmos"
+
         del self.raw

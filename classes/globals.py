@@ -1,8 +1,13 @@
 import csv
-import os
+from datetime import datetime
 from dotenv import load_dotenv
+import string
 
+from classes.taxonomiser import Taxonomiser
+
+taxonomiser = Taxonomiser()
 filters = {}
+
 
 def get_wordnet_pointer_symbols():
     global pointer_symbols
@@ -12,6 +17,7 @@ def get_wordnet_pointer_symbols():
         for row in csv_reader:
             if len(row) > 2:
                 pointer_symbols[row[0]] = row[1].strip()
+
 
 def get_wordnet_lexicographer_files():
     global lexicographer_files
@@ -26,32 +32,29 @@ def get_wordnet_lexicographer_files():
                     "permitted": row[3].strip()
                 }
 
-def open_csvs():
-    global f_wordnet_synset_file, f_wordnet_term_file, f_wordnet_relation_file
-    load_dotenv('.env')
-    wordnet_synset_file = os.path.join(os.getcwd(), "resources", "wordnet", "temp", os.getenv('WORDNET_SYNSET_FILE'))
-    wordnet_term_file = os.path.join(os.getcwd(), "resources", "wordnet", "temp", os.getenv('WORDNET_TERM_FILE'))
-    wordnet_relation_file = os.path.join(os.getcwd(), "resources", "wordnet", "temp", os.getenv('WORDNET_RELATION_FILE'))
-    
-    f_wordnet_synset_file = open(wordnet_synset_file, "w")
-    f_wordnet_term_file = open(wordnet_term_file, "w")
-    f_wordnet_relation_file = open(wordnet_relation_file, "w")
 
 def decapitalize(s):
     if not s:  # check that s is not empty string
         return s
     return s[0].lower() + s[1:]
 
+
 def left(s, amount):
     return s[:amount]
+
 
 def right(s, amount):
     return s[-amount:]
 
-def mid(s, offset, amount):
-    return s[offset:offset+amount]
 
-def cleanse(s):
+def mid(s, offset, amount):
+    return s[offset:offset + amount]
+
+
+def cleanse(s, classification_class=None):
+    if classification_class == "chapter":
+        s = left(s, 1).upper() + right(s, len(s) - 1).lower()
+
     s = s.replace("(", "")
     s = s.replace(")", "")
     s = s.replace("“", '"')
@@ -63,3 +66,32 @@ def cleanse(s):
     s = s.strip('"')
     s = s.strip(',')
     return s
+
+
+def date_format(s):
+    if s == "":
+        s = None
+        s = "2099-12-31"
+    else:
+        s = datetime.strptime(s, '%d/%m/%Y').strftime('%Y-%m-%d')
+    return s
+
+
+def cleanse_friendly_name(s):
+    if "excl." in s:
+        a = 1
+    s = s.lower()
+    s = s.replace("excl.", "excluding")
+    exclude = set(string.punctuation)
+    s = ''.join(ch for ch in s if ch not in exclude)
+    exclusion_terms = [
+        "other than",
+        "excluding",
+        "except for"
+    ]
+    for exclusion_term in exclusion_terms:
+        if exclusion_term in s:
+            s = s.split(exclusion_term)[0]
+            break
+
+    return s.strip()

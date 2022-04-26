@@ -5,33 +5,10 @@ cd "../../7. OTT elastic/elk"
 ./copy_synonyms
 
 echo "Collecting latest taxonomy"
-cd "../../1. Online Tariff/auto-taxonomise-tariff"
-python3 taxon.py
+cd "../../1. Online Tariff/tariff-elastic"
+python3 create_facets.py
 
 echo "Writing commodity code file"
-cd "../emulate-ts"
-python3 emulate.py
+python3 generate_es_corpus.py
 
-# Delete the index
-echo "Deleting elasticsearch index"
-curl -H 'Content-Type: application/json' -XDELETE 'http://localhost:9200/commodities'
-echo "\n"
-
-# Recreate the index with the right mappings
-echo "Recreating elasticsearch index"
-curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/commodities' --data-binary @elasticsearch/create_index.json
-echo "\n"
-
-# Check the mappings are right
-# curl -H 'Content-Type: application/json' -XGET 'http://localhost:9200/commodities/_mapping'
-# echo ""
-
-# Import the commodities data
-echo "Importing commodities data"
-curl -H 'Content-Type: application/json' -XPOST 'localhost:9200/commodities/_doc/_bulk?pretty' --data-binary @resources/ndjson/commodities.ndjson
-echo "\n"
-
-# Count the results
-echo "Counting results"
-curl -H 'Content-Type: application/json' -XGET 'http://localhost:9200/commodities/_count'
-echo "\n"
+./es_index

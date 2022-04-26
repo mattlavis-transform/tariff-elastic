@@ -1,24 +1,24 @@
 import os
 import json
 import string
-from datetime import datetime
-from dotenv import load_dotenv
 import classes.globals as g
 
 
 class Classification(object):
-    def __init__(self, row):
-        self.row = row
-        self.sid = int(row[0])
-        self.goods_nomenclature_item_id = row[1]
-        self.productline_suffix = row[2]
-        self.validity_start_date = self.date_format(row[3])
-        self.validity_end_date = self.date_format(row[4])
-        self.indent = int(row[5])
-        self.end_line = int(row[6])
-        self.description = row[7]
-        self.description_alternative = ""
+    def __init__(self, row=None):
+        self.sid = None
+        self.goods_nomenclature_item_id = ""
+        self.productline_suffix = ""
+        self.validity_start_date = ""
+        self.validity_end_date = ""
+        self.indent = None
+        self.end_line = None
+        self.description = ""
         self.classification_class = ""
+        self.goods_nomenclature_item_id_plus_pls = ""
+        self.hierarchy_string = ""
+
+        self.description_alternative = ""
         self.hierarchy = []
         self.full_hierarchy = []
         self.siblings = []
@@ -26,49 +26,54 @@ class Classification(object):
         self.excluded_terms = []
         self.terms_hierarchy = []
         self.search_references = []
-        del self.row
 
-        self.get_class()
-        self.get_friendly()
-        # self.get_assignments()
-        self.format_description()
+        if row is not None:
+            self.row = row
+            self.sid = int(row[0])
+            self.goods_nomenclature_item_id = row[1]
+            self.productline_suffix = row[2]
+            self.validity_start_date = g.date_format(row[3])
+            self.validity_end_date = g.date_format(row[4])
+            self.indent = int(row[5])
+            self.end_line = int(row[6])
+            self.classification_class = row[8]
+            self.description = g.cleanse(row[7], self.classification_class)
+            self.goods_nomenclature_item_id_plus_pls = row[9]
+            self.hierarchy_string = row[10]
 
-    def date_format(self, s):
-        if s == "":
-            s = None
-            s = "2099-12-31"
-        else:
-            s = datetime.strptime(s, '%d/%m/%Y').strftime('%Y-%m-%d')
-        return s
-    
+            del self.row
+
+            self.get_friendly()
+            self.format_description()
+            self.expand_hierarchy_string()
+
+    def expand_hierarchy_string(self):
+        self.hierarchy_dict = {}
+        if self.hierarchy_string != "":
+            parts = self.hierarchy_string.split(",")
+            for part in parts:
+                string_parts = part.split("_")
+                c = Classification()
+                c.goods_nomenclature_item_id = string_parts[0]
+                c.productline_suffix = string_parts[1]
+                c.goods_nomenclature_item_id_plus_pls = part
+                self.hierarchy_dict[part] = c
+
     def format_description(self):
         self.description = self.description.replace("\u00a0", " ")
-        
+
     def get_friendly(self):
         if self.goods_nomenclature_item_id in g.friendly_names:
             self.friendly_name = g.friendly_names[self.goods_nomenclature_item_id]
         else:
             self.friendly_name = ""
-        
-    def get_assignments(self):
+
+    def get_facet_assignments(self):
         self.assignments = {}
-        if self.sid in g.assignments:
-            assignments = g.assignments[self.sid]
+        if self.sid in g.facet_assignments:
+            assignments = g.facet_assignments[self.sid]
             for assignment in assignments:
                 self.assignments[assignment["filter_name"]] = assignment["value"]
-
-
-    def get_class(self):
-        if g.right(self.goods_nomenclature_item_id, 8) == "00000000":
-            self.classification_class = "chapter"
-            self.description = self.description.capitalize()
-        elif g.right(self.goods_nomenclature_item_id, 6) == "000000":
-            self.classification_class = "heading"
-        else:
-            if self.end_line:
-                self.classification_class = "commodity"
-            else:
-                self.classification_class = "intermediate"
 
     def get_terms(self, stopwords, synonyms):
         self.stopwords = stopwords
@@ -77,15 +82,15 @@ class Classification(object):
             base = self.description
         else:
             base = self.description_alternative
-            
+
         base = base.lower()
-        
+
         exclusion_terms = [
             "other than",
             "excluding",
             "except"
         ]
-        
+
         self.excluded = ""
         for exclusion_term in exclusion_terms:
             if exclusion_term in base:
@@ -109,7 +114,7 @@ class Classification(object):
                 else:
                     if part.lower() not in self.terms:
                         self.terms.append(part.lower())
-                
+
         # Get the terms from the hierarchy
         for item in self.hierarchy:
             if "other" not in item.lower():
@@ -130,15 +135,6 @@ class Classification(object):
     def get_search_references(self, search_references_dict):
         if self.goods_nomenclature_item_id in search_references_dict:
             self.search_references = search_references_dict[self.goods_nomenclature_item_id]
-            a = 1
-        else:
-            b = 1
-        a = 1
-        
-    def get_search_references_old(self, search_references):
-        for search_reference in search_references:
-            if search_reference.goods_nomenclature_item_id == self.goods_nomenclature_item_id:
-                self.search_references.append(search_reference.title)
 
     def get_chapter_heading(self):
         if self.classification_class == "chapter":
@@ -157,17 +153,16 @@ class Classification(object):
             item = {
                 "goods_nomenclature_item_id": hier.goods_nomenclature_item_id,
                 "productline_suffix": hier.productline_suffix,
-                "classification_class": hier.classification_class,
+                "class": hier.classification_class,
                 "description": hier.description
             }
             self.hierarchy_json.append(item)
-    
+
     def write(self, dest_folder):
         if self.description_alternative == "":
             self.description_alternative = self.description
-        
-        self.filename = os.path.join(dest_folder, self.goods_nomenclature_item_id + self.productline_suffix + ".json")
 
+        self.filename = os.path.join(dest_folder, self.goods_nomenclature_item_id + self.productline_suffix + ".json")
         self.json = {}
         self.json["sid"] = self.sid
         self.json["goods_nomenclature_item_id"] = self.goods_nomenclature_item_id
@@ -177,22 +172,22 @@ class Classification(object):
         self.json["class"] = self.classification_class
         self.json["description"] = self.description
         self.json["description_alternative"] = self.description_alternative
+        self.json["friendly_name"] = self.friendly_name
         self.json["chapter"] = self.chapter
         self.json["heading"] = self.heading
         self.json["hierarchy"] = self.hierarchy_json
         self.json["search_references"] = self.search_references
         self.json["validity_start_date"] = self.validity_start_date
         self.json["validity_end_date"] = self.validity_end_date
-        
+
         # Add in the custom assignments if they exist
         for key, value in self.assignments.items():
             self.json[key] = value
-        
+
         # Add in ancestry
-        for i in range (0, 12):
+        for i in range(0, 12):
             if len(self.hierarchy) > i:
                 self.json["ancestor_" + str(i)] = self.hierarchy[i]
-                
         if 0 > 1:
             self.json["terms"] = self.terms
             self.json["excluded_terms"] = self.excluded_terms
@@ -201,12 +196,8 @@ class Classification(object):
 
         with open(self.filename, 'w') as outfile:
             json.dump(self.json, outfile, indent=4)
-            
+
     def check_parent_of_other(self):
-        a = 1
-        q = g.stopwords
-        if "020860" in self.goods_nomenclature_item_id:
-            a = 1
         parent = self.hierarchy[0].lower()
         exclude = set(string.punctuation)
         parent = ''.join(ch for ch in parent if ch not in exclude)
@@ -214,8 +205,7 @@ class Classification(object):
         for element in parent_parts:
             if element in g.stopwords:
                 parent_parts.remove(element)
-        a = 1
-        
+
         parent_modified = parent
         for sibling in self.siblings:
             tmp = sibling.lower()
@@ -233,4 +223,3 @@ class Classification(object):
                 return ""
         else:
             return ""
-

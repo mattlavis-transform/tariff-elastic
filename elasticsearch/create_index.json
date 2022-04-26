@@ -16,6 +16,8 @@
                             "synonyms_food",
                             "synonyms_flowers",
                             "synonyms_cheeses",
+                            "synonyms_animals",
+                            "synonyms_us_english",
                             "my_en_US_dict_stemmer"
                         ]
                     },
@@ -93,6 +95,18 @@
                         "synonyms_path": "synonyms_food.txt",
                         "ignore_case": true,
                         "updateable": true
+                    },
+                    "synonyms_animals": {
+                        "type": "synonym",
+                        "synonyms_path": "synonyms_animals.txt",
+                        "ignore_case": true,
+                        "updateable": true
+                    },
+                    "synonyms_us_english": {
+                        "type": "synonym",
+                        "synonyms_path": "synonyms_us_english.txt",
+                        "ignore_case": true,
+                        "updateable": true
                     }
                 }
             }
@@ -107,7 +121,12 @@
                 "type": "long"
             },
             "goods_nomenclature_item_id": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "productline_suffix": {
                 "type": "text"
@@ -263,6 +282,14 @@
                 }
             },
             "filter_cereal_state": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_herb_spice_state": {
                 "type": "text",
                 "fields": {
                     "raw": {
