@@ -86,9 +86,12 @@ class Classification(object):
         base = base.lower()
 
         exclusion_terms = [
+            "neither",
             "other than",
             "excluding",
-            "except"
+            "not including",
+            "except",
+            " not "
         ]
 
         self.excluded = ""

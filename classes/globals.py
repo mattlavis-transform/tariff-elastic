@@ -85,9 +85,12 @@ def cleanse_friendly_name(s):
     exclude = set(string.punctuation)
     s = ''.join(ch for ch in s if ch not in exclude)
     exclusion_terms = [
+        "neither",
         "other than",
         "excluding",
-        "except for"
+        "not including",
+        "except for",
+        " not "
     ]
     for exclusion_term in exclusion_terms:
         if exclusion_term in s:

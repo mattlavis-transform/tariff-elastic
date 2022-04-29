@@ -21,6 +21,12 @@
                             "my_en_US_dict_stemmer"
                         ]
                     },
+                    "english_exact": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase"
+                        ]
+                    },
                     "english": {
                         "tokenizer": "standard",
                         "filter": [
@@ -207,11 +213,13 @@
             },
             "description": {
                 "analyzer": "english",
-                "type": "text"
-            },
-            "promoted_description": {
-                "analyzer": "english",
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "exact": {
+                        "type": "text",
+                        "analyzer": "english_exact"
+                    }
+                }
             },
             "description_alternative": {
                 "analyzer": "english",
@@ -401,7 +409,7 @@
                     }
                 }
             },
-            "filter_jam_ingredient": {
+            "filter_ingredient": {
                 "type": "text",
                 "fields": {
                     "raw": {
@@ -410,14 +418,6 @@
                 }
             },
             "filter_jam_sugar_content": {
-                "type": "text",
-                "fields": {
-                    "raw": {
-                        "type": "keyword"
-                    }
-                }
-            },
-            "filter_juice_ingredient": {
                 "type": "text",
                 "fields": {
                     "raw": {
@@ -562,6 +562,102 @@
                 }
             },
             "filter_computer_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_metal_usage": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_metal_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_glass_form": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_glass_purpose": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_precious_stone": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_cable_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_cable_material": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_material": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_clothing_fabrication": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_jewellery_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_pump_type": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_art_form": {
                 "type": "text",
                 "fields": {
                     "raw": {

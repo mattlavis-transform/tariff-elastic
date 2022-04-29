@@ -19,6 +19,10 @@ class Taxonomiser:
         self.facet_source_file = os.getenv('FACETS_MASTER')
         self.facet_source_file = os.path.join(os.getcwd(), "resources", "facets_source", self.facet_source_file)
 
+        self.facet_export_file = os.getenv('FACETS_EXPORT_FILE')
+        self.facets_export_folder = os.path.join(os.getcwd(), "resources", "facets_export")
+        self.ndjson_file = os.path.join(self.facets_export_folder, self.facet_export_file)
+
         self.es_settings_template_path = os.getenv('ES_SETTINGS_TEMPLATE_PATH')
         self.es_settings_path = os.getenv('ES_SETTINGS_PATH')
         self.js_filter_path = os.getenv('JS_FILTER_PATH')
@@ -27,7 +31,8 @@ class Taxonomiser:
         self.facets = {}
         self.headings = []
         self.headings_dict = {}
-        self.facets_export_folder = os.path.join(os.getcwd(), "resources", "facets_export")
+
+        print("\nCreating file {filename}\n".format(filename=self.ndjson_file))
 
     def get_facets(self):
         # Get the facets from the source Excel spreadsheet
@@ -119,7 +124,7 @@ class Taxonomiser:
 
     def get_key_terms(self):
         for c in self.commodities:
-            if c.number_indents > 0:
+            if c.number_indents > -1:
                 if c.heading in self.headings_dict:
                     c.expand_facets(self.headings_dict[c.heading])
 
@@ -160,13 +165,8 @@ class Taxonomiser:
 
                     self.filters.append(assignment)
 
-        # Write JSON file
-        # json_file = os.path.join(self.facets_export_folder, "data.json")
-        # with open(json_file, 'w') as outfile:
-        #     json.dump(self.json, outfile, indent=4)
-
         # Write NDJSON file
         # This is used in emulate
-        ndjson_file = os.path.join(self.facets_export_folder, os.getenv("FACETS_FILE"))
+        ndjson_file = os.path.join(self.facets_export_folder, self.facet_export_file)
         with open(ndjson_file, 'w') as f:
             ndjson.dump(self.filters, f)

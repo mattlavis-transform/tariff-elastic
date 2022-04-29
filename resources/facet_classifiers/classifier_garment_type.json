@@ -70,5 +70,29 @@
             "breeches",
             "shorts"
         ]
+    },
+    {
+        "belts and braces": [
+            "belts",
+            "braces"
+        ]
+    },
+    {
+        "footwear": [
+            "shoes",
+            "galoshes",
+            "wellingtons",
+            "slippers",
+            "waders",
+            "boots"
+        ]
+    },
+    {
+        "headgear": [
+            "headgear",
+            "hat",
+            "cap",
+            "headband"
+        ]
     }
 ]

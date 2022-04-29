@@ -16,6 +16,8 @@ class Commodity:
         self.start_date = row[3]
         self.end_date = row[4]
         self.number_indents = int(row[5])
+        if self.number_indents == 0 and self.goods_nomenclature_item_id[2:10] == "00000000":
+            self.number_indents = -1
         self.leaf = int(row[6])
         self.description = row[7]
         self.classification = row[8]
@@ -68,9 +70,12 @@ class Commodity:
         if self.goods_nomenclature_item_id == "0102291030":
             a = 1
         exclusion_terms = [
+            "neither",
             "other than",
             "excluding",
-            "except for"
+            "not including",
+            "except for",
+            " not "
         ]
         for exclusion_term in exclusion_terms:
             if exclusion_term in self.description.lower():

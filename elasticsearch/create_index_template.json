@@ -21,6 +21,12 @@
                             "my_en_US_dict_stemmer"
                         ]
                     },
+                    "english_exact": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase"
+                        ]
+                    },
                     "english": {
                         "tokenizer": "standard",
                         "filter": [
@@ -207,11 +213,13 @@
             },
             "description": {
                 "analyzer": "english",
-                "type": "text"
-            },
-            "promoted_description": {
-                "analyzer": "english",
-                "type": "text"
+                "type": "text",
+                "fields": {
+                    "exact": {
+                        "type": "text",
+                        "analyzer": "english_exact"
+                    }
+                }
             },
             "description_alternative": {
                 "analyzer": "english",

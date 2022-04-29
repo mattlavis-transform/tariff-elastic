@@ -15,7 +15,7 @@ class Application(object):
     def __init__(self):
         load_dotenv('.env')
         self.facets_export_folder = os.path.join(os.getcwd(), "resources", "facets_export")
-        self.facets_file = os.path.join(self.facets_export_folder, os.getenv("FACETS_FILE"))
+        self.facets_export_file = os.path.join(self.facets_export_folder, os.getenv("FACETS_EXPORT_FILE"))
         self.include_search_refs = int(os.getenv('INCLUDE_SEARCH_REFS'))
         self.commodity_file = os.getenv('COMMODITY_MASTER')
         self.friendly_descriptions_file = os.getenv('FRIENDLY_DESCRIPTIONS_FILE')
@@ -23,12 +23,14 @@ class Application(object):
         self.stopwords_file = os.path.join(os.getcwd(), "resources", os.getenv('STOPWORDS_FILE'))
         self.synonyms_file = os.path.join(os.getcwd(), "resources", os.getenv('SYNONYMS_FILE'))
         self.commodities_filename = os.path.join("resources", "ndjson", "commodities.ndjson")
+        self.metadata_folder = os.path.join(os.getcwd(), "resources", "meta")
 
         self.load_synonyms()
         self.load_stopwords()
         self.get_search_references()
         self.get_friendly_names()
         self.get_facet_assignments()
+        self.get_metadata()
 
         self.load_commodity_code_data()
         self.inherit_assignments()
@@ -93,7 +95,7 @@ class Application(object):
         f = open(filename, 'w')
         writer = csv.writer(f)
         for search_reference in self.search_references:
-            row = [search_reference.goods_nomenclature_item_id, search_reference.title]
+            row = [search_reference.goods_nomenclature_item_id, search_reference.referenced_class, search_reference.title]
             a = 1
             writer.writerow(row)
         f.close()
@@ -116,7 +118,7 @@ class Application(object):
 
     def get_facet_assignments(self):
         print("Getting facet assignments")
-        with open(self.facets_file) as f:
+        with open(self.facets_export_file) as f:
             facet_assignments = ndjson.load(f)
             g.facet_assignments = {}
             for item in facet_assignments:
@@ -323,6 +325,9 @@ class Application(object):
             f.write("\n")
         # Close the export file
         f.close()
+
+    def get_metadata(self):
+        a = 1
 
     def complete(self):
         print("Generation of commodities.ndjson complete")
