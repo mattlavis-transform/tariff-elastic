@@ -1,5 +1,36 @@
 [
     {
+        "sodium nitrate": [
+            "sodium nitrate"
+        ]
+    },
+    {
+        "sodium": [
+            "sodium",
+            "^sodium caseinate",
+            "^sodium gluconate",
+            "^sodium phenoxyacetate",
+            "^sodium benzoate",
+            "^sodium chloride",
+            "^sodium nitrate"
+        ]
+    },
+    {
+        "ammonium nitrate": [
+            "ammonium nitrate"
+        ]
+    },
+    {
+        "urea": [
+            "urea"
+        ]
+    },
+    {
+        "calcium carbonate": [
+            "calcium carbonate"
+        ]
+    },
+    {
         "wood": [
             "wood",
             "wooden"
@@ -120,11 +151,6 @@
     {
         "bronze": [
             "bronze"
-        ]
-    },
-    {
-        "sodium": [
-            "sodium"
         ]
     },
     {

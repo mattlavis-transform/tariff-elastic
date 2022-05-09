@@ -1,80 +1,46 @@
 {
-    "took": 28,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": {
-            "value": 1,
-            "relation": "eq"
+    "sid": 84864,
+    "goods_nomenclature_item_id": "2804690010",
+    "heading_id": "2804",
+    "chapter_id": "28",
+    "productline_suffix": "80",
+    "class": "commodity",
+    "description": "Consigned from the Republic of Korea",
+    "description_alternative": "Consigned from the Republic of Korea",
+    "friendly_name": "",
+    "chapter": "Inorganic chemicals; organic or inorganic compounds of precious metals, of rare-earth metals, of radioactive elements or of isotopes",
+    "heading": "Hydrogen, rare gases and other non-metals",
+    "hierarchy": [
+        {
+            "goods_nomenclature_item_id": "2804690000",
+            "productline_suffix": "80",
+            "class": "subheading",
+            "description": "Other"
         },
-        "max_score": 10.248739,
-        "hits": [
-            {
-                "_index": "commodities",
-                "_type": "_doc",
-                "_id": "see_boABCFw_rs-bthWP",
-                "_score": 10.248739,
-                "_source": {
-                    "sid": 86656,
-                    "goods_nomenclature_item_id": "8508110000",
-                    "heading_id": "8508",
-                    "chapter_id": "85",
-                    "productline_suffix": "80",
-                    "class": "commodity",
-                    "description": "Of a power not exceeding 1 500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
-                    "description_alternative": "of a power",
-                    "friendly_name": "vacuum cleaners incl dry cleaners and wet vacuum cleaners with selfcontained electric motor power  1 500 w and having a dust bag or other receptacle capacity  20 l",
-                    "chapter": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles",
-                    "heading": "Vacuum cleaners",
-                    "hierarchy": [
-                        {
-                            "goods_nomenclature_item_id": "8508110000",
-                            "productline_suffix": "10",
-                            "class": "subheading",
-                            "description": "With self-contained electric motor"
-                        },
-                        {
-                            "goods_nomenclature_item_id": "8508000000",
-                            "productline_suffix": "80",
-                            "class": "heading",
-                            "description": "Vacuum cleaners"
-                        },
-                        {
-                            "goods_nomenclature_item_id": "8500000000",
-                            "productline_suffix": "80",
-                            "class": "chapter",
-                            "description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles"
-                        }
-                    ],
-                    "search_references": [],
-                    "validity_start_date": "2007-01-01",
-                    "validity_end_date": "2099-12-31",
-                    "ancestor_0": "With self-contained electric motor",
-                    "ancestor_1": "Vacuum cleaners",
-                    "ancestor_2": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles"
-                }
-            }
-        ]
-    },
-    "suggest": {
-        "did-you-mean": [
-            {
-                "text": "led",
-                "offset": 0,
-                "length": 3,
-                "options": [
-                    {
-                        "text": "led",
-                        "score": 0.025483629,
-                        "collate_match": false
-                    }
-                ]
-            }
-        ]
-    }
+        {
+            "goods_nomenclature_item_id": "2804610000",
+            "productline_suffix": "10",
+            "class": "subheading",
+            "description": "Silicon"
+        },
+        {
+            "goods_nomenclature_item_id": "2804000000",
+            "productline_suffix": "80",
+            "class": "heading",
+            "description": "Hydrogen, rare gases and other non-metals"
+        },
+        {
+            "goods_nomenclature_item_id": "2800000000",
+            "productline_suffix": "80",
+            "class": "chapter",
+            "description": "Inorganic chemicals; organic or inorganic compounds of precious metals, of rare-earth metals, of radioactive elements or of isotopes"
+        }
+    ],
+    "search_references": [],
+    "validity_start_date": "2006-04-21",
+    "validity_end_date": "2099-12-31",
+    "ancestor_0": "Other",
+    "ancestor_1": "Silicon",
+    "ancestor_2": "Hydrogen, rare gases and other non-metals",
+    "ancestor_3": "Inorganic chemicals; organic or inorganic compounds of precious metals, of rare-earth metals, of radioactive elements or of isotopes"
 }

@@ -27,6 +27,7 @@
                             "lowercase"
                         ]
                     },
+                    
                     "english": {
                         "tokenizer": "standard",
                         "filter": [

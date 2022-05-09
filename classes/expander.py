@@ -19,46 +19,6 @@ class Expander:
     def get_terms(self):
         # In which we loop through the 'training' JSON files for all of the standard classifiers
         # to assign facets against comm codes, to be used for filtering and tagging
-        # standard_classifiers = [
-        #     "animal_type",
-        #     "animal_product_state",
-        #     "animal_purpose",
-        #     "bone_state",
-        #     "fish_classification",
-        #     "fat_content",
-        #     "dairy_form",
-        #     "cheese_type",
-        #     "egg_shell_status",
-        #     "egg_purpose",
-        #     "plant_state",
-        #     "fruit_vegetable_state",
-        #     "nut_state",
-        #     "coffee_state",
-        #     "herb_spice_state",
-        #     "cereal_state",
-        #     "flour_source",
-        #     "oil_fat_source",
-        #     "margarine_state",
-        #     "fish_preparation",
-        #     "sugar_state",
-        #     "cocoa_state",
-        #     "pasta_state",
-        #     "bread_type",
-        #     "jam_sugar_content",
-        #     "jam_ingredient",
-        #     "fruit_spirit",
-        #     "juice_ingredient"
-        #     "brix_value",
-        #     "beverage_type",
-        #     "wine_type",
-        #     "alcohol_volume",
-        #     "wine_origin",
-        #     "tobacco_type",
-        #     "clothing_gender",
-        #     "garment_type",
-        #     "garment_material",
-        #     "computer_type"
-        # ]
         for classifier in g.taxonomiser.facets_dict:
             if self.facet == classifier:
                 self.classify_against(classifier)
@@ -79,6 +39,7 @@ class Expander:
         # This will check against the verbatim in the description
         # if there is more than one word in the term
         # And against the stemmed lexemes if there is just one word.
+
         my_porter = PorterStemmer()
         key_terms_stemmed = []
         verbatim_match = False
@@ -87,20 +48,33 @@ class Expander:
                 if self.description == "exceeding 21% but not exceeding 45%":
                     a = 1
             key_terms = filter[key]
+            negator_found = False
             for term in key_terms:
+                if term[0:1] == "^":
+                    is_negator = True
+                else:
+                    is_negator = False
+                term = term.replace("^", "")
+
+                # If there is more than one word
                 if len(term.split()) > 1:
                     if term in self.description:
                         if "not" not in term and "not" in self.description:
                             verbatim_match = False
                         else:
                             verbatim_match = True
-                            break
+                            # break
+
+                if is_negator:
+                    negator_found = True
+                    break
 
                 term_stemmed = my_porter.stem(term)
                 key_terms_stemmed.append(term_stemmed)
 
-            intersection_set = set.intersection(set(key_terms_stemmed), set(self.lexemes))
+            if negator_found is False:
+                intersection_set = set.intersection(set(key_terms_stemmed), set(self.lexemes))
 
-            term_found = True if (len(intersection_set) > 0 or verbatim_match) else False
-            if term_found:
-                self.terms.append(key)
+                term_found = True if (len(intersection_set) > 0 or verbatim_match) else False
+                if term_found:
+                    self.terms.append(key)

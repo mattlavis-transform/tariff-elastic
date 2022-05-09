@@ -17,6 +17,8 @@ class Classification(object):
         self.classification_class = ""
         self.goods_nomenclature_item_id_plus_pls = ""
         self.hierarchy_string = ""
+        self.parent_sid = None
+        self.friendly_name = ""
 
         self.description_alternative = ""
         self.hierarchy = []
@@ -32,6 +34,7 @@ class Classification(object):
             self.sid = int(row[0])
             self.goods_nomenclature_item_id = row[1]
             self.productline_suffix = row[2]
+            self.comm_code_plus_pls = self.goods_nomenclature_item_id + "_" + self.productline_suffix
             self.validity_start_date = g.date_format(row[3])
             self.validity_end_date = g.date_format(row[4])
             self.indent = int(row[5])
@@ -40,11 +43,11 @@ class Classification(object):
             self.description = g.cleanse(row[7], self.classification_class)
             self.goods_nomenclature_item_id_plus_pls = row[9]
             self.hierarchy_string = row[10]
+            self.parent_comm_code_plus_pls = None
 
             del self.row
 
             self.get_friendly()
-            self.format_description()
             self.expand_hierarchy_string()
 
     def expand_hierarchy_string(self):
@@ -59,14 +62,10 @@ class Classification(object):
                 c.goods_nomenclature_item_id_plus_pls = part
                 self.hierarchy_dict[part] = c
 
-    def format_description(self):
-        self.description = self.description.replace("\u00a0", " ")
-
     def get_friendly(self):
-        if self.goods_nomenclature_item_id in g.friendly_names:
-            self.friendly_name = g.friendly_names[self.goods_nomenclature_item_id]
-        else:
-            self.friendly_name = ""
+        if self.productline_suffix == "80":
+            if self.goods_nomenclature_item_id in g.friendly_names:
+                self.friendly_name = g.friendly_names[self.goods_nomenclature_item_id]
 
     def get_facet_assignments(self):
         self.assignments = {}
@@ -76,6 +75,7 @@ class Classification(object):
                 self.assignments[assignment["filter_name"]] = assignment["value"]
 
     def get_terms(self, stopwords, synonyms):
+        return
         self.stopwords = stopwords
         # Get the terms from the description
         if self.description_alternative == "":
@@ -128,6 +128,7 @@ class Classification(object):
                         self.terms_hierarchy.append(part.lower())
 
     def write_exclusion_terms(self):
+        return
         parts = self.excluded.split()
         for part in parts:
             part = g.cleanse(part).lower()

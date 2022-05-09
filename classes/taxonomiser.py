@@ -61,6 +61,7 @@ class Taxonomiser:
         for i in range(2, max_row):
             h = Heading()
             h.id = sheet_headings.cell(row=i, column=1).value
+            a = 1
             for j in range(3, max_col):
                 v = sheet_headings.cell(row=i, column=j).value
                 if v != "" and v is not None:
@@ -111,6 +112,12 @@ class Taxonomiser:
         # Loops through the list of commodities extracted from the "download Taric files > codes.py"
         # service: this list is then used to act as the base for adding filters to the extracted
         # data JSON file
+
+        # commodity_min = "3000000000"
+        # commodity_max = "4000000000"
+        commodity_min = "0000000000"
+        commodity_max = "9999999999"
+
         with open(self.commodity_file) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
@@ -119,12 +126,15 @@ class Taxonomiser:
                     line_count += 1
                 else:
                     c = Commodity(row)
-                    self.commodities.append(c)
-                    line_count += 1
+                    if c.goods_nomenclature_item_id > commodity_min and c.goods_nomenclature_item_id < commodity_max:
+                        self.commodities.append(c)
+                        line_count += 1
 
     def get_key_terms(self):
         for c in self.commodities:
             if c.number_indents > -1:
+                if c.heading == "0102":
+                    a = 1
                 if c.heading in self.headings_dict:
                     c.expand_facets(self.headings_dict[c.heading])
 

@@ -28,3 +28,5 @@
 ### To import data into Elasticsearch
 `./es_import`
 
+### Run the synonym copy only
+"../../7. OTT elastic/elk/copy_synonyms"

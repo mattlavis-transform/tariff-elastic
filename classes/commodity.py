@@ -92,10 +92,10 @@ class Commodity:
         return s
 
     def expand_facets(self, facets):
-        if self.goods_nomenclature_item_id == "0401100000":
+        if self.goods_nomenclature_item_id == "0102291000":
             a = 1
         for facet in facets:
-            expander = Expander(facet, self.lexemes, self.description)
+            expander = Expander(facet, self.lexemes, self.description_original)
             self.facets[facet] = expander.terms
 
     def inherit_facets(self):

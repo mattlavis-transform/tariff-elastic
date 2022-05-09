@@ -44,7 +44,7 @@
 0206000000,Heading,"edible offal, meat - fresh chilled frozen"
 0206000000,Heading,"offal, edible meat - fresh, chilled, frozen"
 0206000000,Heading,sweetbreads (edible offal)
-0206000000,Heading,"tongues - fresh, chilled or frozen"
+0206210000,Commodity,"beef tongue, frozen"
 0207000000,Heading,chicken liver
 0207000000,Heading,"edible offal, poultry (other than liver)"
 0207000000,Heading,"fowls, dead"
@@ -158,6 +158,7 @@
 0406908190,Commodity,lancashire
 0406908190,Commodity,monterey
 0406908190,Commodity,wensleydale
+0406908990,Commodity,halloumi
 0407000000,Heading,eggs and yolks
 0407000000,Heading,hatching eggs
 0408000000,Heading,"yolk, egg"
@@ -238,6 +239,8 @@
 0603000000,Heading,cut flowers
 0603000000,Heading,flower buds
 0603000000,Heading,flower bulbs
+0603000000,Heading,garlands
+0603000000,Heading,wreaths
 0604000000,Heading,"foliage, natural and ornamental (not bearing flowers or flower buds)"
 0604000000,Heading,grasses for ornamental purposes
 0604000000,Heading,lichens for ornamental purposes
@@ -247,6 +250,7 @@
 0702000000,Heading,tomatoes (fresh or chilled)
 0703000000,Heading,garlic (fresh)
 0703000000,Heading,onions (fresh)
+0703900000,Commodity,chives
 0704000000,Heading,cauliflowers
 0705000000,Heading,chicory salad fresh or chilled
 0705000000,Heading,lettuce (fresh)
@@ -266,6 +270,8 @@
 0709000000,Heading,pumpkins (fresh)
 0709000000,Heading,spices
 0709000000,Heading,spinach (fresh)
+0709600000,Subheading,"chillies, fresh"
+0709930000,Subheading,butternut squash
 0710000000,Heading,Frozen vegetables (mixed)
 0710000000,Heading,horseradish (frozen)
 0710000000,Heading,mixed vegetables (frozen)
@@ -336,17 +342,25 @@
 0809000000,Heading,plums (fresh)
 0810000000,Heading,"berries, fresh"
 0810000000,Heading,lychees (fresh)
+0810907590,Commodity,"annona, fresh"
 0811000000,Heading,"fruit, edible, including peel and nuts - frozen"
 0812000000,Heading,"fruit, edible, including peel and nuts - provisionally preserved"
 0813000000,Heading,gogi berries (dried)
+0901000000,Heading,coffee beans
 0901000000,Heading,"coffee - raw, roasted and filter"
 0901000000,Heading,coffee - substitutes containing coffee
+0902000000,Heading,chai
+0902000000,Heading,fruit tea
+0902000000,Heading,herbal tea
 0902000000,Heading,tea
+0902000000,Heading,teabags
+0902000000,Heading,tea bags
 0903000000,Heading,mate
 0904000000,Heading,allspice (dried)
 0904000000,Heading,pepper
 0904000000,Heading,peppercorns
 0904000000,Heading,pimento
+0904220000,Subheading,"paprika, ground"
 0905000000,Heading,vanilla
 0906000000,Heading,cinnamon
 0907000000,Heading,cloves
@@ -365,6 +379,7 @@
 0910000000,Heading,ginger (spices)
 0910000000,Heading,saffron
 0910000000,Heading,thyme
+0910910500,Commodity,curry powder
 1000000000,Chapter,cereals - unmilled
 1001000000,Heading,meslin
 1001000000,Heading,wheat
@@ -578,11 +593,15 @@
 1507000000,Heading,oiticica oil
 1507000000,Heading,soya bean oil
 1508000000,Heading,groundnut oil
+1509000000,Heading,cooking oil (olive)
+1509000000,Heading,lampante olive oil
 1509000000,Heading,olive oil
 1511000000,Heading,palm kernel oil
 1511000000,Heading,palm oil
 1512000000,Heading,cotton seed oil
 1512000000,Heading,sunflower seed oil
+1512119100,Commodity,cooking oil (sunflower)
+1512119100,Commodity,sunflower oil
 1513000000,Heading,coconut (copra) oil
 1514000000,Heading,mustard - fixed oil
 1514000000,Heading,rape oil (including colza oil)
@@ -593,6 +612,10 @@
 1515000000,Heading,sesamum oil
 1515000000,Heading,tobacco seed oil
 1515000000,Heading,tung oil
+1515906000,Subheading,cooking oil (vegetable)
+1515906000,Subheading,vegetable oil
+1515909100,Commodity,cbd oil
+1515909100,Commodity,hemp oil
 1516000000,Heading,"castor oil, hydrogenated"
 1516000000,Heading,neatsfoot oil
 1516000000,Heading,palm kernel oil
@@ -630,24 +653,24 @@
 1522000000,Heading,oil foots and dregs
 1522000000,Heading,"residues, fatty"
 1522000000,Heading,soap stocks
+1601000000,Heading,chorizos
+1601000000,Heading,kabanos
 1601000000,Heading,sausages
-1602000000,Heading,"bacon, canned, prepared or preserved"
-1602000000,Heading,"bacon, prepared or preserved"
-1602000000,Heading,beef - prepared or preserved
-1602000000,Heading,"beef - tongues, canned, prepared or otherwise preserved"
-1602000000,Heading,corned beef
-1602000000,Heading,"ham and hams, prepared or reserved"
-1602000000,Heading,"lamb (meat) - canned, prepared or otherwise preserved"
 1602000000,Heading,meat pastes
 1602000000,Heading,meat pies
-1602000000,Heading,"mutton - canned, or prepared or otherwise preserved"
-1602000000,Heading,mutton - corned
-1602000000,Heading,pastes - poultry and meat
-1602000000,Heading,"pates, poultry or meat"
-1602000000,Heading,"pig products, canned, prepared or otherwise prepared"
-1602000000,Heading,"pork, canned, prepared or otherwise preserved"
-1602000000,Heading,"poultry liver, canned, prepared or otherwise preserved"
-1602000000,Heading,"veal, canned, prepared or otherwise preserved (including jellied veal)"
+1602310000,Subheading,"pastes, poultry"
+1602310000,Subheading,"patés, poultry"
+1602410000,Subheading,"bacon, canned, prepared or preserved"
+1602410000,Subheading,"bacon, prepared or preserved"
+1602410000,Subheading,"ham and hams, prepared or reserved"
+1602410000,Subheading,"pig products, canned, prepared or otherwise prepared"
+1602410000,Subheading,"pork, canned, prepared or otherwise preserved"
+1602500000,Subheading,beef - prepared or preserved
+1602500000,Subheading,"beef - tongues, canned, prepared or otherwise preserved"
+1602500000,Subheading,"veal, canned, prepared or otherwise preserved (including jellied veal)"
+1602909100,Commodity,"lamb (meat) - canned, prepared or otherwise preserved"
+1602909100,Commodity,"mutton, canned, or prepared or otherwise preserved"
+1602909100,Commodity,"mutton, corned"
 1603000000,Heading,extracts - meat
 1603000000,Heading,meat - extracts and juices
 1603000000,Heading,whalemeat extract
@@ -680,6 +703,7 @@
 1702000000,Heading,glucose
 1702000000,Heading,"honey, artificial"
 1702000000,Heading,isoglucose
+1702000000,Heading,jaggery
 1702000000,Heading,lactose
 1702000000,Heading,maple sugar and syrup
 1702000000,Heading,sugar(s) - chemically pure
@@ -704,10 +728,12 @@
 1704000000,Heading,panned and sugar coated goods
 1704000000,Heading,pastes and masses for making confectionery
 1704000000,Heading,"pastilles, confectionery"
+1704000000,Heading,"snacks: candy, not containing cocoa"
 1704000000,Heading,"sugar(s) - confectionery, not containing cocoa"
 1704000000,Heading,"sweets, boiled"
 1704000000,Heading,"toffees, not chocolate covered"
 1704000000,Heading,white chocolate
+1704900000,Subheading,fudge
 1801000000,Heading,beans - cocoa
 1801000000,Heading,cocoa - beans
 1802000000,Heading,cocoa - shells and husks
@@ -715,11 +741,13 @@
 1802000000,Heading,cocoa - waste
 1803000000,Heading,cocoa -paste
 1803000000,Heading,paste cocoa
+1804000000,Heading,"body oil, cocoa butter, fat and oil"
 1804000000,Heading,"butter, cocoa"
 1804000000,Heading,cocoa - butter
 1804000000,Heading,fat - cocoa
 1804000000,Heading,oil - cocoa
 1805000000,Heading,"cocoa - powder, unsweetened"
+1806000000,Heading,chocolate bar
 1806000000,Heading,chocolate - confectionery
 1806000000,Heading,chocolate - couverture
 1806000000,Heading,chocolate - milk crumb
@@ -728,6 +756,8 @@
 1806000000,Heading,cocoa - preparations
 1806000000,Heading,confectionery chocolate
 1806000000,Heading,"couverture, chocolate"
+1806000000,Heading,hot chocolate
+1806000000,Heading,snacks: chocolate - confectionery
 1901000000,Heading,extracts - malt
 1901000000,Heading,flour preparations
 1901000000,Heading,malt extract
@@ -743,7 +773,9 @@
 1903000000,Heading,tapioca and substitutes
 1904000000,Heading,cereals - prepared by swelling or roasting
 1904000000,Heading,cornflakes
+1904000000,Heading,granola
 1904000000,Heading,puffed rice
+1904900000,Subheading,porridge
 1905000000,Heading,biscuits
 1905000000,Heading,biscuits covered in chocolate
 1905000000,Heading,bread and breadcrumbs
@@ -762,6 +794,7 @@
 1905000000,Heading,sealing wafers of cereal flour
 1905000000,Heading,ships biscuits
 1905000000,Heading,waffles and wafers
+1905310000,Subheading,shortbread
 1905907000,Subheading,pizza
 2000000000,Chapter,"vegetables, edible - frozen"
 2000000000,Chapter,"vegetables, edible - otherwise prepared or preserved"
@@ -769,6 +802,7 @@
 2001000000,Heading,"fruit, edible, including peel and nuts - prepared or preserved by vinegar or acetic acid"
 2001000000,Heading,mango chutney
 2001000000,Heading,"vegetables, edible - prepared or preserved by vinegar or acetic acid"
+2001902000,Commodity,"chillies, prepared or preserved by vinegar"
 2002000000,Heading,canned vegetables
 2002000000,Heading,"juice, tomato (dry weight content 7% or more)"
 2002000000,Heading,tomato juice (dry weight content 7% or more)
@@ -776,6 +810,7 @@
 2005000000,Heading,ginger preserved in syrup
 2005000000,Heading,popodoms
 2005000000,Heading,potato crisps
+2005590000,Commodity,baked beans
 2006000000,Heading,"crystallised fruit, fruit peel and parts of plants"
 2006000000,Heading,"drained fruit, fruit peel and parts of plants"
 2006000000,Heading,"fruit, edible, including peel and nuts - drained glace or crystallised"
@@ -797,6 +832,8 @@
 2008000000,Heading,"groundnuts, roasted"
 2008000000,Heading,"nuts, roasted or salted"
 2008000000,Heading,peanut butter
+2008111000,Commodity,peanutbutter
+2008205100,Subheading,banana chips
 2009000000,Heading,citrus fruit juice (no added water)
 2009000000,Heading,"fruit, edible, including peel and nuts - juices"
 2009000000,Heading,"fruit juice, concentrates"
@@ -826,7 +863,11 @@
 2103000000,Heading,"sauces, spicy"
 2103000000,Heading,"seasonings, mixed"
 2103000000,Heading,tomato ketchup
+2103900000,Subheading,gravy
+2103900000,Subheading,marmite
+2103900000,Subheading,pesto
 2104000000,Heading,broths
+2104000000,Heading,snacks: homogenised composite food preparations
 2104000000,Heading,soups
 2104000000,Heading,"vegetables, edible - otherwise prepared or preserved"
 2105000000,Heading,ice-cream
@@ -847,17 +888,21 @@
 2106000000,Heading,"table jelly crystals, powders and squares"
 2106000000,Heading,vitamin food supplements
 2106000000,Heading,"yeast, autolysed"
+2106902090,Commodity,tofu
+2106909849,Commodity,tofu
+2201000000,Heading,carbonated drinks
+2201000000,Heading,fizzy drinks
 2201000000,Heading,mineral water
 2201000000,Heading,spa waters
 2201000000,Heading,water (mineral or aerated)
 2202000000,Heading,"aerated waters, flavoured or sweetened"
-2202000000,Heading,cola beverage
+2202000000,Heading,energy drinks
 2202000000,Heading,Flavoured milk
 2202000000,Heading,Flavoured water
 2202000000,Heading,milk fresh - flavoured
 2202000000,Heading,"non-alcoholic beverages, ready for consumption"
 2202000000,Heading,"spa waters, flavoured"
-2202100000,Commodity,coca cola
+2202100000,Commodity,cola beverage
 2202100000,Commodity,lemonade
 2203000000,Heading,"beer, malt"
 2203000000,Heading,bitter
@@ -894,6 +939,7 @@
 2208000000,Heading,spirits - beverages
 2208000000,Heading,vodka
 2208000000,Heading,whisky
+2209000000,Heading,balsamic vinegar
 2209000000,Heading,malt vinegar
 2209000000,Heading,vinegar (including substitutes)
 2301000000,Heading,fish - meal and flour (animal foods)
@@ -946,6 +992,7 @@
 2309000000,Heading,solubles - fish
 2309000000,Heading,solubles - marine mammal
 2309000000,Heading,vitamin supplements for animal feeding
+2309900000,Subheading,bird feed
 2401000000,Heading,tobacco - unmanufactured
 2402000000,Heading,cheroots
 2402000000,Heading,cigarettes
@@ -962,6 +1009,7 @@
 2501000000,Heading,denatured salt
 2501000000,Heading,evaporated salt
 2501000000,Heading,rock salt
+2501000000,Heading,saline
 2501000000,Heading,salt
 2501000000,Heading,sea salt
 2501000000,Heading,sodium chloride
@@ -1196,6 +1244,7 @@
 2810000000,Heading,boric oxide
 2811000000,Heading,carbon dioxide
 2811000000,Heading,silica gel
+2811210000,Commodity,dry ice
 2812000000,Heading,"chlorides and oxychlorides, of non-metals"
 2812000000,Heading,halides
 2813000000,Heading,phosphuorus trisulphide
@@ -1368,11 +1417,13 @@
 2932000000,Heading,heterocyclic compounds
 2933000000,Heading,barbiturates - other
 2933000000,Heading,lactams
+2934000000,Heading,DNA
 2934000000,Heading,nucleic acids
 2934000000,Heading,sultones and sultams
 2935000000,Heading,sulphonamides
 2936000000,Heading,provitamins and vitamins
 2936000000,Heading,vitamins
+2936900000,Commodity,"biotin, vitamin b7"
 2937000000,Heading,hormones
 2937000000,Heading,insulin
 2938000000,Heading,glycosides
@@ -1383,8 +1434,7 @@
 2940000000,Heading,sugar(s) - chemically pure
 2941000000,Heading,antibiotics
 2941000000,Heading,penicillin
-2941000000,Heading,streptomycin
-2941000000,Heading,tetracycline
+2941200000,Subheading,streptomycin
 3000000000,Chapter,chemical mixtures and preparations
 3000000000,Chapter,pharmaceutical products
 3001000000,Heading,glands or other organs and extracts (medical)
@@ -1392,6 +1442,7 @@
 3001000000,Heading,organo therapeutics
 3001000000,Heading,organs (animal)
 3001000000,Heading,tissues - human or animal
+3002000000,Heading,antibodies
 3002000000,Heading,antisera
 3002000000,Heading,"block, animal for therapeutic uses"
 3002000000,Heading,"blood, human"
@@ -1410,10 +1461,10 @@
 3003000000,Heading,ointments (medical)
 3003000000,Heading,paracetamol
 3003000000,Heading,penicillin
-3003000000,Heading,streptomycin
 3003000000,Heading,sulphonamides
 3003000000,Heading,veterinary medicaments
 3003000000,Heading,"vitamins, medicaments"
+3003100000,Commodity,streptomycin
 3004000000,Heading,acetic acid - acetylalicylic acid (aspirin tablets)
 3004000000,Heading,antibiotics
 3004000000,Heading,anti-histamine medicaments
@@ -1425,7 +1476,6 @@
 3004000000,Heading,paracetamol
 3004000000,Heading,penicillin
 3004000000,Heading,sodium bicarbonate (bicarbonate of sofa)
-3004000000,Heading,streptomycin
 3004000000,Heading,sulphonamides
 3004000000,Heading,veterinary medicaments
 3004000000,Heading,"vitamins, medicaments"
@@ -1514,7 +1564,10 @@
 3212000000,Heading,laundry blue
 3212000000,Heading,pigments
 3212000000,Heading,stamping foils
-3213000000,Heading,artists colours
+3213000000,Heading,acrylic paints
+3213000000,Heading,aerosol paints
+3213000000,Heading,artists' colours
+3213000000,Heading,artists' paints
 3214000000,Heading,cement based paints
 3214000000,Heading,dealing waxes
 3214000000,Heading,"filings, painters"
@@ -1534,6 +1587,7 @@
 3301000000,Heading,concentrates essential oil
 3301000000,Heading,concretes (essential oils)
 3301000000,Heading,"essential oils, extracted oleoresins"
+3301000000,Heading,eucalyptus oil
 3301000000,Heading,jasmine
 3301000000,Heading,mustard - essential oil
 3301000000,Heading,oil - essential
@@ -1549,6 +1603,7 @@
 3303000000,Heading,toilet water
 3304000000,Heading,barrier creams
 3304000000,Heading,beauty preparations
+3304000000,Heading,beauty products
 3304000000,Heading,body lotions
 3304000000,Heading,cleansing creams
 3304000000,Heading,eye make-up
@@ -1568,17 +1623,30 @@
 3304000000,Heading,suntan preparations
 3304000000,Heading,talcum powder
 3304000000,Heading,varnish removers
+3304100000,Commodity,lip balm
+3304990000,Commodity,balm
+3304990000,Commodity,face cream
+3304990000,Commodity,hand cream
+3304990000,Commodity,hand lotion
+3304990000,Commodity,moisturiser
 3305000000,Heading,"dyes, hair"
 3305000000,Heading,hair care preparations
 3305000000,Heading,permanent hair waving apparatus
 3305000000,Heading,shampoos
 3305000000,Heading,toilet - preparations
-3306000000,Heading,dental floss
+3305300000,Commodity,hair spray
+3305900000,Commodity,conditioner
+3305900000,Commodity,hair colourings
+3305900000,Commodity,hair conditioner
+3305900000,Commodity,hair dyes
 3306000000,Heading,denture-cleansing preparations
 3306000000,Heading,denture fixtures
 3306000000,Heading,mouth washes
 3306000000,Heading,toilet - preparations
-3306000000,Heading,toothpaste or powder
+3306100000,Commodity,toothpaste
+3306100000,Commodity,toothpowder
+3306200000,Commodity,dental floss
+3306900000,Commodity,mouthwash
 3307000000,Heading,after-shave and pre-shave lotions
 3307000000,Heading,animal toilet preparations
 3307000000,Heading,antiperspirants
@@ -1595,7 +1663,13 @@
 3307000000,Heading,scented sachets
 3307000000,Heading,shaving cream
 3307000000,Heading,toilet - preparations
+3307300000,Commodity,bath bombs
+3307410000,Commodity,air freshener
+3307410000,Commodity,room scent
+3401000000,Heading,baby wipes
 3401000000,Heading,detergents
+3401000000,Heading,hand soap
+3401000000,Heading,hand wash
 3401000000,Heading,medicated soap
 3401000000,Heading,shower gel
 3401000000,Heading,"soap, soap flakes and powders"
@@ -1603,8 +1677,10 @@
 3401000000,Heading,toilet - soap
 3402000000,Heading,alkyl phenol ethoxylates
 3402000000,Heading,cleaning preparations
+3402000000,Heading,contact lens cleaning solution
 3402000000,Heading,de-greasing preparations
 3402000000,Heading,emulsifiers
+3402000000,Heading,laundry detergents
 3402000000,Heading,organic surface active agent
 3402000000,Heading,"soap, substitutes"
 3402000000,Heading,toilet - preparations
@@ -1648,6 +1724,7 @@
 3505000000,Heading,"starch, soluble or roasted"
 3506000000,Heading,cellulose based glues put up for retail sale
 3506000000,Heading,glues and size
+3506000000,Heading,loctite
 3506000000,Heading,vegetable glues
 3507000000,Heading,enzymes prepared
 3507000000,Heading,rennet
@@ -1763,6 +1840,8 @@
 3808000000,Heading,"sulphur - candles, bands and wicks"
 3808000000,Heading,weed killer (herbicides)
 3808000000,Heading,"wicks, sulphur-treated"
+3808940000,Subheading,hand sanitisers
+3808940000,Subheading,hand sanitizers
 3809000000,Heading,"dressing - for textiles, paper or leather"
 3809000000,Heading,flame-retardant preparations
 3809000000,Heading,"mordants, prepared"
@@ -1801,6 +1880,7 @@
 3816000000,Heading,"concretes and cements, refractory"
 3816000000,Heading,refractory cements or mortars
 3818000000,Heading,silicon alloys and products (including transistors)
+3820000000,Heading,antifreeze
 3820000000,Heading,anti-freezing preparations
 3820000000,Heading,de-icing fluids
 3821000000,Heading,"culture media, prepared"
@@ -1852,14 +1932,14 @@
 3824000000,Heading,stencil correctors (retail)
 3824000000,Heading,waterproofing additives for cement
 3824000000,Heading,waterproofing preparations or cements (etc)
+3824509000,Commodity,grout
 3825000000,Heading,clinical waste
 3825000000,Heading,municipal waste
 3825000000,Heading,waste - clinical
-3900000000,Chapter,carbon fibre reinforced with plastic
-3900000000,Chapter,glass fibre-reinforced plastics
-3900000000,Chapter,"moulding powders, plastics"
 3901000000,Heading,polyethylene (polythene) in primary form
 3902000000,Heading,"polypropylene, in primary form"
+3903000000,Heading,abs plastics
+3903000000,Heading,"plastics, abs"
 3903000000,Heading,"polystyrene, in primary form"
 3904000000,Heading,"polytetrafluoroethylene, in primary form"
 3904000000,Heading,"polyvinyl chloride (pvc), in primary forms"
@@ -1984,6 +2064,7 @@
 3926000000,Heading,binders - of plastic
 3926000000,Heading,bins wastepaper
 3926000000,Heading,bollards - plastic
+3926000000,Heading,"buckets, plastic"
 3926000000,Heading,coat hangers - plastics
 3926000000,Heading,contraceptives - sheath
 3926000000,Heading,"erasers, plastic"
@@ -1997,6 +2078,7 @@
 3926000000,Heading,motor vehicle parts and accessories - seals plastic
 3926000000,Heading,pallets - of plastics
 3926000000,Heading,paper weights - plastics
+3926000000,Heading,plastic buckets
 3926000000,Heading,Plastic face shields (covering more than the eye area)
 3926000000,Heading,Plastic gloves
 3926000000,Heading,"pneumatic mattresses, plastic"
@@ -2012,6 +2094,7 @@
 3926000000,Heading,trophies - plastic
 3926000000,Heading,"washers, of plastic"
 3926000000,Heading,watch - glasses of plastics
+3926200000,Commodity,"waders, plastic"
 4000000000,Chapter,latex
 4001000000,Heading,balata
 4001000000,Heading,gutta-percha
@@ -2027,6 +2110,7 @@
 4002000000,Heading,styrene butadiene rubber
 4002000000,Heading,"suction hose, rubber"
 4002000000,Heading,synthetic rubber
+4002410000,Subheading,neoprene
 4003000000,Heading,rubber - reclaimed
 4004000000,Heading,rubber - parings
 4004000000,Heading,rubber - scraps
@@ -2064,7 +2148,8 @@
 4008000000,Heading,sheets of rubber
 4008000000,Heading,strip - rubber
 4008000000,Heading,tiles - rubber
-4009000000,Heading,"hosepiping, rubber"
+4009000000,Heading,"garden hose, of rubber"
+4009000000,Heading,"hosepiping, of rubber"
 4009000000,Heading,"motor vehicle parts and accessories - hoses, rubber"
 4009000000,Heading,"piping, rubber"
 4009000000,Heading,rubber - hosepiping
@@ -2079,6 +2164,7 @@
 4011000000,Heading,"motor vehicle parts and accessories - tyres, rubber"
 4011000000,Heading,rubber - tyres
 4011000000,Heading,tyre rubber
+4011500000,Commodity,"bicycle tyres, new"
 4012000000,Heading,"motor vehicle parts and accessories - tyres, rubber"
 4012000000,Heading,rubber - tyres
 4012000000,Heading,"treads, rubber tyre, interchangeable"
@@ -2092,15 +2178,18 @@
 4014000000,Heading,"sheath, contraceptives, rubber"
 4014000000,Heading,syringes
 4014000000,Heading,"teats, rubber"
-4015000000,Heading,apparel - rubber
+4015000000,Heading,"apparel, rubber"
 4015000000,Heading,corset belts
-4015000000,Heading,gloves - of rubber
+4015000000,Heading,"gloves, rubber"
+4015000000,Heading,"medical gloves, rubber"
 4015000000,Heading,rubber - apparel
 4015000000,Heading,rubber - gloves
-4015000000,Heading,"Rubber gloves of a kind used for medical, surgical, dental or veterinary purposes"
+4015000000,Heading,"rubber gloves of a kind used for medical, surgical, dental or veterinary purposes"
 4015000000,Heading,shoulder pads
+4015120000,Subheading,latex gloves
 4015120000,Commodity,"Surgical gloves, of vulcanised rubber (PPE)"
 4015190000,Commodity,"Gloves, mittens and mitts, of vulcanised rubber (excl. surgical gloves)"
+4015900000,Commodity,"waders, rubber"
 4016000000,Heading,"bands, rubber (e.g. office equipment)"
 4016000000,Heading,"erasers, rubber"
 4016000000,Heading,motor vehicle parts and accessories - seals rubber
@@ -2114,6 +2203,8 @@
 4016000000,Heading,"seals, rubber"
 4016000000,Heading,tiles - rubber
 4016000000,Heading,washers of rubber
+4016950000,Commodity,"air bed, of vulcanised rubber"
+4016950000,Commodity,"inflatable mattress, of vulcanised rubber"
 4016999700,Subheading,"Boot covers / overshoes - made of plastic or rubber, disposable (PPE)"
 4017000000,Heading,"ebonite, and articles of"
 4017000000,Heading,"pacifiers, rubber"
@@ -2164,14 +2255,17 @@
 4201000000,Heading,harness (for animals)
 4201000000,Heading,leather - harness and saddlery for animals
 4201000000,Heading,saddlery
-4202000000,Heading,backpacks
 4202000000,Heading,"bags - designed for prolonged use, of leather, plastics, textile or paperboard"
 4202000000,Heading,"bags, travelling of leather, plastic sheeting, textile or paperboard"
 4202000000,Heading,briefcases
 4202000000,Heading,cosmetic case - other
+4202000000,Heading,cotton bags
 4202000000,Heading,document cases
 4202000000,Heading,"handbags, leather, plastic sheeting, textile fabric or paperboard"
 4202000000,Heading,hat boxes
+4202000000,Heading,holdalls
+4202000000,Heading,laptop bag
+4202000000,Heading,laptop case
 4202000000,Heading,"leather - bags, handbags, pochettes"
 4202000000,Heading,leather - of composition leather: articles of a kind used in machinery or mechanical devices
 4202000000,Heading,leather - travel goods
@@ -2183,7 +2277,6 @@
 4202000000,Heading,pochettes
 4202000000,Heading,"pouches, leather, plastics or textile"
 4202000000,Heading,"purses, leather, plastics or textile"
-4202000000,Heading,rucksacks
 4202000000,Heading,shopping bags
 4202000000,Heading,"skins - other, raw"
 4202000000,Heading,spectacle cases
@@ -2195,6 +2288,8 @@
 4202000000,Heading,"trunks, travelling"
 4202000000,Heading,vanity cases
 4202000000,Heading,"wallets of leather, plastics or textile"
+4202110000,Subheading,backpacks
+4202110000,Subheading,rucksacks
 4202310000,Subheading,"passport holder or case, leather"
 4202320000,Subheading,"passport holder or case, plastic or textile"
 4202910000,Subheading,camera cases
@@ -2245,6 +2340,7 @@
 4401000000,Heading,wood - waste
 4402000000,Heading,"charcoal, wood"
 4402000000,Heading,wood - charcoal
+4402200000,Subheading,biochar
 4403000000,Heading,"pitprops, wood"
 4403000000,Heading,"pulpwood, other"
 4403000000,Heading,"telegraphic poles, wood"
@@ -2267,6 +2363,7 @@
 4408000000,Heading,"veneer sheets, wood"
 4408000000,Heading,"wood - sawn lengthwise, sliced or peeled, whether or not planed"
 4409000000,Heading,"beading, wood"
+4409000000,Heading,dowels
 4409000000,Heading,drawn wood
 4409000000,Heading,"mouldings, wood"
 4409000000,Heading,wood - drawn
@@ -2295,6 +2392,7 @@
 4412000000,Heading,wood flooring
 4412000000,Heading,wood - plywood
 4412340000,Commodity,palm plywood
+4412410000,Subheading,lvl
 4413000000,Heading,wood - densified
 4414000000,Heading,"frames - mirror, photograph and pictures, wood"
 4415000000,Heading,boxes of wood
@@ -2305,8 +2403,8 @@
 4415000000,Heading,packing cases of wood
 4415000000,Heading,pallets - of wood
 4416000000,Heading,"barrels, wood"
-4416000000,Heading,buckets wood
-4416000000,Heading,casks - wood
+4416000000,Heading,"buckets, wood"
+4416000000,Heading,"casks, wood"
 4416000000,Heading,coopers product wood
 4416000000,Heading,"staves, wood, finished or unfinished"
 4416000000,Heading,"tubs, wood"
@@ -2392,6 +2490,8 @@
 4707000000,Heading,waste - paper or paperboard
 4801000000,Heading,newsprint
 4801000000,Heading,"paper and paperboard, other in rolls or sheets - newsprint (including bulk mechanical)"
+4802000000,Heading,A3 paper
+4802000000,Heading,A4 paper
 4802000000,Heading,duplicating paper
 4802000000,Heading,"paper and paperboard, other in rolls or sheets - hand made"
 4802000000,Heading,"paper and paperboard, other in rolls or sheets - kraft paper and paper board"
@@ -2462,6 +2562,7 @@
 4811000000,Heading,"paper and paperboard, specific type of article - rape, self-adhesive (pressure sensitive) paper based"
 4811000000,Heading,"tapes - self-adhesive (pressure sensitive), paper based"
 4811000000,Heading,wrapping - paper
+4811410000,Subheading,masking tape
 4812000000,Heading,"paper and paperboard, general categories - filter blocks, slabs and plates"
 4813000000,Heading,"paper and paperboard, general categories - cigarette paper (whether or not cut to size)"
 4813000000,Heading,"paper and paperboard, other in rolls or sheets - cigarette paper"
@@ -2497,6 +2598,7 @@
 4818000000,Heading,tissues - facial
 4818000000,Heading,"towels, paper"
 4818000000,Heading,"towels, sanitary of cellulose wadding"
+4818300000,Commodity,tablecloths
 4819000000,Heading,"bags, paper"
 4819000000,Heading,boxes of paper or paperboard
 4819000000,Heading,cardboard boxes
@@ -2525,7 +2627,11 @@
 4820000000,Heading,"paper and paperboard, specific type of article - registers, account books and the like"
 4820000000,Heading,"paper and paperboard, specific type of article - stationery (paper)"
 4820000000,Heading,stationery - paper
+4820100000,Subheading,notepads
+4820500000,Commodity,photo albums
+4821000000,Heading,adhesive labels
 4821000000,Heading,"paper and paperboard, general categories - labels, whether or not printed or gummed"
+4821000000,Heading,self-adhesive labels
 4822000000,Heading,bobbins - of paper
 4822000000,Heading,cops of paper
 4822000000,Heading,"paper and paperboard, general categories - bobbins, spools, cops etc"
@@ -2555,13 +2661,17 @@
 4901000000,Heading,dictionaries
 4901000000,Heading,directories
 4901000000,Heading,encyclopaedias in paper form
+4901000000,Heading,hardback books
 4901000000,Heading,"leaflets, pamphlets, etc, printed - other"
 4901000000,Heading,"pamphlets, leaflets, etc, printed - other"
+4901000000,Heading,paperback books
 4901000000,Heading,travel literature
 4901000000,Heading,typescripts
+4901990000,Commodity,bible
 4901990000,Commodity,crossword puzzle book
 4901990000,Commodity,puzzle book
 4901990000,Commodity,wordsearch puzzle book
+4902000000,Heading,comics
 4902000000,Heading,"illustrated newspapers, journals and periodicals"
 4902000000,Heading,journals
 4902000000,Heading,newspapers
@@ -2620,7 +2730,13 @@
 4911000000,Heading,"trade lists, printed"
 4911000000,Heading,travel literature
 4911000000,Heading,typescripts
+4911990000,Commodity,birth certificates
 4911990000,Commodity,business cards
+4911990000,Commodity,drivers' licence
+4911990000,Commodity,driving licence
+4911990000,Commodity,legal documents
+4911990000,Commodity,passports
+4911990000,Commodity,personal documents
 5001000000,Heading,"cocoons, silk worm - suitable for reeling"
 5001000000,Heading,"silk - cocoons, suitable for reeling"
 5002000000,Heading,silk - raw (not thrown)
@@ -2774,7 +2890,7 @@
 5303000000,Heading,thespesia
 5303000000,Heading,tien-tsin
 5303000000,Heading,tossa
-5305000000,Heading,abaca (manilla hemp)
+5305000000,Heading,abaca manilla hemp
 5305000000,Heading,"agave fibres, not spun"
 5305000000,Heading,bowstring hemp (sansevieria)
 5305000000,Heading,cantala
@@ -2972,6 +3088,7 @@
 5806000000,Heading,silk - narrow woven fabrics
 5806000000,Heading,"tapes - woven textile, narrow"
 5806000000,Heading,"webbing, textile, narrow woven"
+5806320000,Subheading,velcro
 5807000000,Heading,"badges, woven textile, not embroidered"
 5807000000,Heading,"emblems, textile - not embroidered"
 5807000000,Heading,"labels, textile not embroidered"
@@ -3010,6 +3127,7 @@
 5904000000,Heading,linoleum
 5906000000,Heading,adhesive tape - rubberised textile
 5906000000,Heading,"cotton textile - fabrics, knitted impregnated coated covered or laminated with rubber"
+5906000000,Heading,duct tape
 5906000000,Heading,"fabrics (textile) other than knitted, crocheted or woven - rubberised"
 5906000000,Heading,fabric (textile) woven - rubberised
 5906000000,Heading,tapes - rubberised textile
@@ -3054,6 +3172,8 @@
 6004000000,Heading,"fabrics (textile), knitted or crocheted - with elastomeric yarn"
 6005000000,Heading,"fabrics (textile), knitted or crocheted - warp knitted"
 6006000000,Heading,"fabrics (textile), knitted or crocheted - other"
+6100000000,Chapter,adults' clothing
+6100000000,Chapter,children's clothing
 6100000000,Chapter,crocheted garments
 6100000000,Chapter,garments - knitted or crocheted
 6100000000,Chapter,knitted garments
@@ -3115,6 +3235,7 @@
 6107000000,Heading,underwear - knitted
 6108000000,Heading,"bathrobes, knitted or crocheted"
 6108000000,Heading,"dressing gowns, knitted or crocheted"
+6108000000,Heading,lingerie
 6108000000,Heading,"negligees, knitted or crocheted"
 6108000000,Heading,"nightdresses, knitted or crocheted"
 6108000000,Heading,"panties, knitted or crocheted"
@@ -3141,6 +3262,7 @@
 6112000000,Heading,ski suits - knitted or crocheted
 6112000000,Heading,swimwear - knitted or crocheted
 6112000000,Heading,track suits - knitted or crocheted
+6112410000,Subheading,"bikini, knitted or crocheted"
 6113000000,Heading,garments - made up of knitted or crocheted fabrics of 59.03 or 59.06 or 59.07
 6113000000,Heading,oilskins
 6113001000,Commodity,infant training pants
@@ -3152,15 +3274,16 @@
 6114000000,Heading,ecclesiastical goods - garments
 6114000000,Heading,fencing sports apparel
 6114000000,Heading,"gowns, professional"
-6114000000,Heading,habits
 6114000000,Heading,jockey silks
 6114000000,Heading,leotards
 6114000000,Heading,monks' habits
+6114000000,Heading,nuns' habits
 6114000000,Heading,robes
 6114000000,Heading,smocks
 6114000000,Heading,surplices
 6115000000,Heading,ankle socks
 6115000000,Heading,hosiery
+6115000000,Heading,lingerie
 6115000000,Heading,panty-hose
 6115000000,Heading,socks
 6115000000,Heading,stockings
@@ -3189,6 +3312,8 @@
 6117000000,Heading,"ties, bow ties and cravats - knitted or crocheted"
 6117000000,Heading,ties - textile
 6117000000,Heading,wimples
+6200000000,Chapter,adults' clothing
+6200000000,Chapter,children's clothing
 6200000000,Chapter,garments - other than knitted or crocheted
 6200000000,Chapter,headgear
 6200000000,Chapter,raincoats - textile
@@ -3244,6 +3369,7 @@
 6207000000,Heading,underwear - woven
 6208000000,Heading,"bathrobes, women's or girls'"
 6208000000,Heading,"dressing gowns, women's or girls'"
+6208000000,Heading,lingerie
 6208000000,Heading,negligees
 6208000000,Heading,"nightdresses, women's or girls'"
 6208000000,Heading,"nightwear, women's or girls'"
@@ -3270,6 +3396,9 @@
 6211000000,Heading,swimwear - other than knitted or crocheted
 6211000000,Heading,track suits - other than knitted or crocheted
 6211000000,Heading,waistcoats - other than knitted or crocheted
+6211120000,Commodity,"bikini, not knitted or crocheted"
+6211321000,Commodity,hi-vis clothing
+6211331000,Commodity,hi-vis clothing
 6212000000,Heading,armlets
 6212000000,Heading,body belts
 6212000000,Heading,braces (clothing)
@@ -3278,12 +3407,14 @@
 6212000000,Heading,corselets
 6212000000,Heading,girdles
 6212000000,Heading,jock straps
+6212000000,Heading,lingerie
 6212000000,Heading,maternity belts
 6212000000,Heading,panty-girdles
 6212000000,Heading,suspenders and suspender belts
 6212000000,Heading,suspensory bandages
 6212100000,Subheading,mastectomy bras
 6213000000,Heading,"handkerchiefs, textile"
+6214000000,Heading,bandanas
 6214000000,Heading,scarves
 6214000000,Heading,"shawls, scarves, mufflers, mantillas, veils and the like - other than knitted or crocheted"
 6214000000,Heading,wedding veils
@@ -3305,16 +3436,20 @@
 6217000000,Heading,socks
 6217000000,Heading,stockings
 6217000000,Heading,wimples
+6217100000,Subheading,hairband
+6217100000,Subheading,scrunchie
 6301000000,Heading,blankets - electric (textile)
 6301000000,Heading,blankets - other textile
 6301000000,Heading,breeches - knitted or crocheted men's or boys
 6301000000,Heading,electric blankets
 6301000000,Heading,rugs - rugs (travelling)
 6301000000,Heading,travelling rugs
-6302000000,Heading,"bags, for packing of goods, of woven textile materials"
 6302000000,Heading,bed linen
+6302000000,Heading,bedsheets
+6302000000,Heading,bed sheets
 6302000000,Heading,bolster cases
 6302000000,Heading,drip mats
+6302000000,Heading,duvet covers
 6302000000,Heading,eiderdown cases
 6302000000,Heading,face - cloth or towel
 6302000000,Heading,gloves - textile toilet/wash gloves
@@ -3327,6 +3462,11 @@
 6302000000,Heading,table linen
 6302000000,Heading,"toilet - linen, textile"
 6302000000,Heading,"towels, textile"
+6302600000,Subheading,"bath towel, of terry fabric"
+6302600000,Subheading,"beach towel, of terry fabric"
+6302600000,Subheading,"hand towel, of terry fabric"
+6302600000,Subheading,tea towels
+6302600000,Subheading,"towel, of terry fabric"
 6303000000,Heading,blinds - textile
 6303000000,Heading,curtains textile
 6303000000,Heading,"net curtains, woven"
@@ -3340,7 +3480,6 @@
 6304000000,Heading,"made up articles - of textile including dress patterns, not elsewhere specified or included"
 6305000000,Heading,sachets - textile
 6305000000,Heading,"sacks, for the packing of goods, of woven textile material"
-6306000000,Heading,airbeds of rubberised textile fabric
 6306000000,Heading,"awnings, textile"
 6306000000,Heading,camping goods -textiles
 6306000000,Heading,"groundsheets, textile"
@@ -3349,6 +3488,9 @@
 6306000000,Heading,"sunblinds, textile"
 6306000000,Heading,tarpaulins - textile
 6306000000,Heading,"tents, textile"
+6306400000,Commodity,airbeds of rubberised textile fabric
+6306400000,Commodity,"airbed, textile-covered"
+6306400000,Commodity,"inflatable mattress, textile-covered"
 6307000000,Heading,banner (textile)
 6307000000,Heading,bunting (textile)
 6307000000,Heading,carry cots (textile)
@@ -3369,10 +3511,13 @@
 6307000000,Heading,tennis rachets head covers
 6307000000,Heading,"Textile face-masks, without a replaceable filter or mechanical parts"
 6307000000,Heading,"webbing slings, textile"
+6307100000,Subheading,microfibre cloths
 6308000000,Heading,pyjamas
 6309000000,Heading,"apparel - worn, in bulk packings"
+6309000000,Heading,"children's clothing, worn"
+6309000000,Heading,"clothes, second-hand"
 6309000000,Heading,"footwear - worn, in bulk packing"
-6309000000,Heading,"sails, textile"
+6309000000,Heading,second-hand clothes
 6310000000,Heading,"cables, textile, scrap or worn out"
 6310000000,Heading,"rag, other than pulled or garneted"
 6310000000,Heading,"rope - textile, scrap or worn out"
@@ -3384,7 +3529,7 @@
 6400000000,Chapter,trainers
 6401000000,Heading,footwear - plastic or rubber
 6401000000,Heading,leather - footwear
-6401000000,Heading,over boots and overshoes
+6401000000,Heading,overboots and overshoes
 6401000000,Heading,plastic footwear
 6401000000,Heading,rubber - footwear
 6401000000,Heading,wellingtons (boots)
@@ -3436,19 +3581,27 @@
 6501000000,Heading,"plateaux, hat, felt"
 6502000000,Heading,"hat shapes, plaited"
 6504000000,Heading,hats and other headgear of plaited material
+6505000000,Heading,balaclavas
+6505000000,Heading,beanie
+6505000000,Heading,beanie hat
 6505000000,Heading,berets
-6505000000,Heading,Disposable hair nets
+6505000000,Heading,disposable hair nets
 6505000000,Heading,eccelsiastical goods - headgear
-6505000000,Heading,"hair, other - nets"
+6505000000,Heading,headwear
 6505000000,Heading,helmets
 6505000000,Heading,"nets, hair"
 6505000000,Heading,nuns' headdresses
 6505000000,Heading,nurses caps
 6505000000,Heading,snoods
 6505000000,Heading,sou'westers
+6505003000,Commodity,baseball caps
 6506000000,Heading,bathing caps
 6506000000,Heading,fur hats
 6506000000,Heading,safety helmets
+6506100000,Subheading,bicycle helmet
+6506100000,Subheading,crash helmets
+6506100000,Subheading,hard hats
+6506100000,Subheading,safety helmets
 6507000000,Heading,hat foundation and frames
 6507000000,Heading,head-bands (parts of hats)
 6601000000,Heading,parasols
@@ -3506,6 +3659,8 @@
 6804000000,Heading,whetstones
 6805000000,Heading,abrasive on a vase of paper or fabric 
 6805000000,Heading,"file - nail, emery board"
+6805200000,Commodity,sandpaper
+6805200000,Commodity,sand paper
 6806000000,Heading,ceramic fibres
 6806000000,Heading,clay expanded
 6806000000,Heading,"fibre, ceramic"
@@ -3521,6 +3676,7 @@
 6808000000,Heading,"vegetable fibre, agglomerated, blocked, panel, etc with mineral binder"
 6808000000,Heading,"wood - fibre, shaving, etc, agglomerated, with mineral binders"
 6809000000,Heading,"plaster, articles of "
+6809000000,Heading,plasterboard
 6809000000,Heading,rosettes - plaster
 6810000000,Heading,"artificial - stone, articles of"
 6810000000,Heading,"bricks and blocks - concrete, including refractory concrete"
@@ -3597,9 +3753,14 @@
 6911000000,Heading,mug
 6911000000,Heading,"rolling pins, ceramic"
 6911000000,Heading,"tableware, ceramic"
-6912000000,Heading,cooking utensils (ceramic)
-6912000000,Heading,rolling pins (ceramic)
-6912000000,Heading,tableware (ceramic)
+6911100000,Subheading,"jugs, porcelain or china"
+6911100000,Subheading,"mugs, porcelain or china"
+6911100000,Subheading,"plates, porcelain or china	"
+6912000000,Heading,"cooking utensils, ceramic"
+6912000000,Heading,"mugs, ceramic"
+6912000000,Heading,"rolling pins, ceramic"
+6912000000,Heading,"tableware, ceramic"
+6912000000,Heading,"vases, ceramic"
 6913000000,Heading,"jardinières, ceramic"
 6913000000,Heading,"ornaments, ceramic"
 6913000000,Heading,paper weights - ceramic
@@ -3641,9 +3802,15 @@
 7013000000,Heading,cooking utensils - glass
 7013000000,Heading,"decanters, glass, precious metal"
 7013000000,Heading,domestic glassware
+7013000000,Heading,drinkware
 7013000000,Heading,paper weights - glass
 7013000000,Heading,stationery - glassware
 7013000000,Heading,table glassware
+7013220000,Subheading,champagne glasses
+7013220000,Subheading,"wine glasses, stemware"
+7013330000,Subheading,"beakers, glassware"
+7013410000,Subheading,glass vase
+7013990000,Subheading,"ashtrays, glass"
 7015000000,Heading,"clocks - glasses, not optically worked"
 7015000000,Heading,"watch - glasses, other"
 7016000000,Heading,"bricks, glass"
@@ -3651,6 +3818,7 @@
 7016000000,Heading,glass - tiles
 7016000000,Heading,rosettes - glass
 7017000000,Heading,"acidimeters - for dairy products, of glass"
+7017000000,Heading,"beakers, laboratory equipment"
 7017000000,Heading,calcimeters
 7017000000,Heading,"inhalers, glass"
 7017000000,Heading,laboratory glassware
@@ -3686,6 +3854,8 @@
 7103000000,Heading,amethyst
 7103000000,Heading,aquamarine
 7103000000,Heading,garnet
+7103000000,Heading,gemstones
+7103000000,Heading,gem stones
 7103000000,Heading,jade
 7103000000,Heading,lapis lazuli
 7103000000,Heading,moonstone
@@ -3719,6 +3889,7 @@
 7112000000,Heading,"platinum, waste and scrap"
 7112000000,Heading,silver - waste and scrap
 7113000000,Heading,brooches - precious metal
+7113000000,Heading,"charms, of precious metal"
 7113000000,Heading,cuff links of precious metal
 7113000000,Heading,diamond ring
 7113000000,Heading,gold - gold jewellery
@@ -3750,6 +3921,7 @@
 7116000000,Heading,precious metal chemical compounds - colloids and amalgams
 7116000000,Heading,"precious or semi precious stones - articles of (natural, synthetic or reconstructed) "
 7117000000,Heading,brooches - imitation jewellery
+7117000000,Heading,"charms, of base metal"
 7117000000,Heading,costume jewellery
 7117000000,Heading,cuff-links of base metal
 7117000000,Heading,imitation jewellery
@@ -3760,6 +3932,7 @@
 7118000000,Heading,coins (scrap)
 7118000000,Heading,gold coins
 7118000000,Heading,silver coins
+7200000000,Chapter,mild steel
 7201000000,Heading,iron or steel - pig iron
 7201000000,Heading,iron or steel -spiegeleisen
 7201000000,Heading,pig iron
@@ -3958,10 +4131,12 @@
 7318000000,Heading,"screw hooks and rings, iron or steel"
 7318000000,Heading,"washers, iron or steel"
 7318000000,Heading,"wood screws, iron or steel"
+7318210000,Subheading,circlips
 7319000000,Heading,"bodkins, iron or steel"
 7319000000,Heading,"crochet hooks, iron or steel"
 7319000000,Heading,darning needles
 7319000000,Heading,"embroidery stilettos, iron or steel"
+7319000000,Heading,haberdashery
 7319000000,Heading,knitting needles - of iron or steel
 7319000000,Heading,"needles - hand sewing and knitting , of iron or steel"
 7319000000,Heading,"pins, ordinary - iron or steel"
@@ -3978,6 +4153,7 @@
 7321000000,Heading,camping goods - stoves
 7321000000,Heading,"cookers, non electric iron or steel"
 7321000000,Heading,"fire, non electric, domestic, of iron or steel"
+7321000000,Heading,"firepits, gas or liquid fuel, made of iron or steel"
 7321000000,Heading,"grates, domestic or iron or steel"
 7321000000,Heading,"plate warmers, non electric, domestic, of iron or steel"
 7321000000,Heading,"ranges, non electric, iron or steel"
@@ -3988,9 +4164,11 @@
 7322000000,Heading,"heaters, air, non-electric, of iron or steel"
 7322000000,Heading,"hot air distributors, non electric iron or steel"
 7322000000,Heading,"radiators, central heating, non electric - iron or steel"
+7323000000,Heading,"baking trays, of iron or steel"
 7323000000,Heading,buckets steel
 7323000000,Heading,coat hangers - iron or steel
 7323000000,Heading,"colanders, iron or steel"
+7323000000,Heading,"frying pans, of iron or steel"
 7323000000,Heading,household articles of iron or steel
 7323000000,Heading,"iron or steel - wool, scourers and pads"
 7323000000,Heading,"pot scourers, iron or steel"
@@ -4000,6 +4178,7 @@
 7323000000,Heading,tinned iron or steel - hollow ware
 7323000000,Heading,trays - for domestic use - iron or steel
 7323000000,Heading,"wool, iron or steel"
+7323990090,Commodity,"ashtrays, stainless steel"
 7324000000,Heading,baths of iron or steel
 7324000000,Heading,bidets - iron or steel
 7324000000,Heading,sanitary wares - iron or steel
@@ -4207,6 +4386,7 @@
 7616000000,Heading,reinforcing fabric of aluminium wire
 7616000000,Heading,"screening, woven wire, aluminium"
 7616000000,Heading,"sieving, woven wire, aluminium"
+7616990000,Subheading,aluminium ladder
 7800000000,Chapter,lead
 7801000000,Heading,bullion lead
 7801000000,Heading,solder - predominantly of lead
@@ -4296,6 +4476,7 @@
 8201000000,Heading,bill hooks
 8201000000,Heading,forestry non power hand tools
 8201000000,Heading,"forks, horticulture"
+8201000000,Heading,garden tools
 8201000000,Heading,hand - tools non electric
 8201000000,Heading,hatchets
 8201000000,Heading,hay knives
@@ -4356,6 +4537,7 @@
 8204000000,Heading,spanners
 8204000000,Heading,torque wrenches
 8204000000,Heading,wrenches (hand tools)
+8204110000,Subheading,allen keys
 8205000000,Heading,anvils
 8205000000,Heading,blow lamps
 8205000000,Heading,"braces, carpenters"
@@ -4387,6 +4569,8 @@
 8205000000,Heading,tyre-levers
 8205000000,Heading,"vices, clamps"
 8205000000,Heading,"wrenches, tap"
+8205200000,Commodity,mallets
+8205200000,Commodity,sledgehammers
 8207000000,Heading,auger bits
 8207000000,Heading,"bits, drilling"
 8207000000,Heading,broaching tools
@@ -4418,13 +4602,17 @@
 8208000000,Heading,knife blades
 8208000000,Heading,knives (base metal) and cutting blades - for machines or mechanical appliances
 8209000000,Heading,"tool sticks, tips and plates (unmounted) of sintered metal carbide"
+8210000000,Heading,bottle openers
+8210000000,Heading,can openers
 8210000000,Heading,"coffee mills, domestic, non electric"
+8210000000,Heading,corkscrew
 8210000000,Heading,"food grinders, domestic, non-electric"
 8210000000,Heading,"food mixers domestic, non electric"
 8210000000,Heading,"food slicers, domestic, non electric"
 8210000000,Heading,freezing equipment 
 8210000000,Heading,"juice extractors, domestic, non electric"
 8210000000,Heading,"mincers, food, domestic, non electric"
+8210000000,Heading,tin openers
 8211000000,Heading,blades - knife
 8211000000,Heading,camping goods - knives of base metal
 8211000000,Heading,cutlery
@@ -4482,6 +4670,7 @@
 8302000000,Heading,"hat pegs, of base metal, wall mounted"
 8302000000,Heading,"hat racks, of base metal, wall mounted"
 8302000000,Heading,"hinges, base metal"
+8302000000,Heading,"latches, base metal"
 8302000000,Heading,"motor vehicle parts and accessories - door handles and winders, base metal"
 8303000000,Heading,"cash boxes, base metal"
 8303000000,Heading,"deed boxes, base metal"
@@ -4683,8 +4872,11 @@
 8414000000,Heading,turbo chargers (for vehicles)
 8414000000,Heading,vacuum pump (not of glass)
 8414000000,Heading,vanes
-8415000000,Heading,air conditioning machinery
-8415000000,Heading,"machines and machinery - air conditioning, self contained"
+8414200000,Subheading,bicycle pump
+8415000000,Heading,aircon
+8415000000,Heading,air-conditioning machinery
+8415000000,Heading,air-conditioning unit
+8415000000,Heading,"machines and machinery - air-conditioning, self contained"
 8416000000,Heading,ash dischargers
 8416000000,Heading,"burners, furnace, non-electric"
 8416000000,Heading,dischargers
@@ -4770,6 +4962,7 @@
 8421000000,Heading,spin dryers
 8421000000,Heading,tumble driers
 8421000000,Heading,"water filters, softeners and purification equipment"
+8421230000,Subheading,fuel filter for internal combustion engines
 8422000000,Heading,aerating machinery (beverages)
 8422000000,Heading,banding machine
 8422000000,Heading,bottle cleaning and drying machines
@@ -4804,6 +4997,8 @@
 8424000000,Heading,"spraying equipment, including spray guns"
 8424000000,Heading,steam blasting machine
 8424000000,Heading,syringes
+8424300000,Subheading,pressure washers
+8424410000,Subheading,"sprinkler, horticultural"
 8425000000,Heading,capstans
 8425000000,Heading,davits
 8425000000,Heading,"jacks, lifting"
@@ -5014,6 +5209,7 @@
 8443000000,Heading,dating machines
 8443000000,Heading,digital copiers
 8443000000,Heading,ink jet printing machine
+8443000000,Heading,laser printer
 8443000000,Heading,machines and machinery - newspaper and magazine printing
 8443000000,Heading,machines and machinery - printing
 8443000000,Heading,multi-function copiers
@@ -5229,6 +5425,7 @@
 8471000000,Heading,compact discs (cd) rom drive readers
 8471000000,Heading,computer
 8471000000,Heading,computer mouse
+8471000000,Heading,computer software
 8471000000,Heading,data processing machines
 8471000000,Heading,"date stamps, hand operated"
 8471000000,Heading,desktop computer
@@ -5244,6 +5441,7 @@
 8471000000,Heading,"mouse, computer"
 8471000000,Heading,netbook
 8471000000,Heading,pc
+8471000000,Heading,personal computer
 8471000000,Heading,"scanner, computer"
 8471000000,Heading,servers - file for digital processing
 8471000000,Heading,servers - for data transmission
@@ -5256,6 +5454,9 @@
 8471000000,Heading,"tape loading systems for automatic data processing machine, automatic"
 8471000000,Heading,touch screens
 8471000000,Heading,"visual display units, for computers"
+8471300000,Commodity,notebook (laptop)
+8471900000,Commodity,bank card reader
+8471900000,Commodity,barcode scanner
 8472000000,Heading,addressing machines
 8472000000,Heading,banknote counting machines
 8472000000,Heading,cheque-writing machines
@@ -5275,6 +5476,8 @@
 8473000000,Heading,computer case with power supply unit
 8473000000,Heading,dongle
 8473000000,Heading,"drams (dynamic random access memories), mounted on boards, designed specifically for computers"
+8473000000,Heading,laptop chargers
+8473000000,Heading,laptop stands
 8473000000,Heading,"motherboards, without processor and memory, computer"
 8474000000,Heading,breaker machines - ceramic clay
 8474000000,Heading,brick making machinery
@@ -5366,6 +5569,8 @@
 8479000000,Heading,tea processing machinery
 8479000000,Heading,transducers (ultrasonic)
 8479000000,Heading,wire (stranded) manufacturing machinery
+8479600000,Commodity,"air-conditioning unit, evaporative"
+8479600000,Commodity,"aircon, evaporative"
 8480000000,Heading,machines and machinery - moulding boxes for metal foundry
 8480000000,Heading,machines and machinery - tyre moulds
 8480000000,Heading,moulding boxes for metal foundry
@@ -5384,6 +5589,8 @@
 8481000000,Heading,"taps, for boilers, pipes, tanks, etc"
 8481000000,Heading,"valves - for boilers, pipes, tanks, etc"
 8481000000,Heading,valves - for pneumatic tyres and inner tubes
+8481801100,Subheading,faucets
+8481801100,Subheading,"taps, bathroom or kitchen"
 8482000000,Heading,ball bearings
 8482000000,Heading,balls - for ball bearings
 8482000000,Heading,"bearings - ball, roller or needle roller"
@@ -5417,6 +5624,7 @@
 8483000000,Heading,"shafts, transmission for machinery"
 8483000000,Heading,"transmission shafts, for machinery"
 8483000000,Heading,worm - gears
+8483403000,Subheading,ballscrews
 8484000000,Heading,"gaskets, composite or sets"
 8484000000,Heading,"machines and machinery - gaskets, composite or sets"
 8484000000,Heading,mechanical seals
@@ -5461,6 +5669,7 @@
 8504000000,Heading,ballasts (electrical)
 8504000000,Heading,battery chargers
 8504000000,Heading,chargers (accumulators)
+8504000000,Heading,"charging cable, mobile phone"
 8504000000,Heading,computer power supply unit (psu)
 8504000000,Heading,germanium and silicon rectifying apparatus
 8504000000,Heading,induction coils
@@ -5481,6 +5690,7 @@
 8504000000,Heading,transformers
 8504000000,Heading,"transformers, electric"
 8504000000,Heading,uninterruptable power supply
+8504000000,Heading,wireless chargers - mobile phones	
 8505000000,Heading,electro magnets
 8505000000,Heading,electro magnets
 8505000000,Heading,fridge magnets
@@ -5489,13 +5699,17 @@
 8505000000,Heading,permanent magnets and blanks
 8506000000,Heading,batteries and cells
 8506000000,Heading,"batteries, electric, non - rechargeable"
+8506000000,Heading,battery pack
 8506000000,Heading,dry cell batteries
+8506000000,Heading,powerbank
 8506000000,Heading,primary cells and batteries
 8506000000,Heading,thermocouples
 8506000000,Heading,wet cells
 8507000000,Heading,accumulators (rechargeable batteries)
 8507000000,Heading,"electrical apparatus, appliances and machinery - accumulators"
+8507200000,Subheading,lead acid battery
 8508000000,Heading,"cleaners, vacuum"
+8508000000,Heading,hoovers
 8508000000,Heading,vacuum cleaners
 8508000000,Heading,"vacuum cleaners, domestic"
 8509000000,Heading,electric toothbrushes
@@ -5522,6 +5736,8 @@
 8511000000,Heading,starting and ignition equipment for internal combustion engines
 8511000000,Heading,"starting equipment, electric, for internal combustion engines"
 8512000000,Heading,"defrosters and demisters, electric for motor vehicles"
+8512000000,Heading,headlamps
+8512000000,Heading,headlights
 8512000000,Heading,"lighting equipment, electric, for cycles or motor vehicles"
 8512000000,Heading,parking sensors
 8512000000,Heading,signalling equipment
@@ -5529,6 +5745,7 @@
 8512000000,Heading,speed camera detectors
 8512000000,Heading,"windscreen wipers, electric"
 8513000000,Heading,"torches (portable hand held), electric"
+8513900000,Commodity,lampshades
 8514000000,Heading,"cooking, industrial and laboratory including microwave ovens"
 8514000000,Heading,"furnace, electric, industrial and laboratory"
 8514000000,Heading,"furnaces, industrial and laboratory"
@@ -5582,6 +5799,8 @@
 8516000000,Heading,urns - cooking with heating repellents
 8516000000,Heading,"water heaters, instantaneous or storage"
 8516000000,Heading,"water heaters, instantaneous or storage, electric"
+8516290000,Subheading,"firepits, electric"
+8516600000,Subheading,rice cooker
 8517000000,Heading,adapters - local area networks
 8517000000,Heading,adapters - wide area networks
 8517000000,Heading,base stations (mobile phones)
@@ -5589,6 +5808,7 @@
 8517000000,Heading,cable tv equipment -optoelectronic receiver
 8517000000,Heading,cable tv equipment - optoelectronic transmitter
 8517000000,Heading,carrier-current line apparatus for telecommunications
+8517000000,Heading,cellphones
 8517000000,Heading,communication apparatus radio
 8517000000,Heading,"communication apparatus, tele communication"
 8517000000,Heading,de-modulators - carrier current line
@@ -5612,6 +5832,7 @@
 8517000000,Heading,multiplexers - for telecommunications
 8517000000,Heading,networking apparatus - for local area networks (lan)
 8517000000,Heading,networking apparatus - for wide area networks (wan)
+8517000000,Heading,network switches
 8517000000,Heading,"optoelectronic receivers, cable tv"
 8517000000,Heading,"optoelectronic transmitters, cable tv"
 8517000000,Heading,oscillators - carrier current line
@@ -5624,7 +5845,6 @@
 8517000000,Heading,radio - transmitter receivers
 8517000000,Heading,router
 8517000000,Heading,switchboards - telephonic
-8517000000,Heading,switchboards - telephonic
 8517000000,Heading,telecommunications apparatus
 8517000000,Heading,"telephone, mobile"
 8517000000,Heading,telephone sets
@@ -5636,9 +5856,10 @@
 8517000000,Heading,wide area network apparatus
 8517000000,Heading,wireless router
 8518000000,Heading,"amplifiers, audio-frequency"
+8518000000,Heading,earbuds
 8518000000,Heading,headphones
 8518000000,Heading,hi-fi separates - amplifiers (audio frequency)
-8518000000,Heading,hi-fi separates -headphones
+8518000000,Heading,hi-fi separates - headphones
 8518000000,Heading,hi-fi separates - speakers
 8518000000,Heading,loudspeakers
 8518000000,Heading,megaphones
@@ -5711,10 +5932,12 @@
 8523000000,Heading,hole punch
 8523000000,Heading,magnetic swipe cards
 8523000000,Heading,masters (record producing)
+8523000000,Heading,memory cards
 8523000000,Heading,recorded media for sound or other similarly recorded phenomena
 8523000000,Heading,"recording, sound or data cd"
 8523000000,Heading,recording tapes
 8523000000,Heading,"records, gramophone"
+8523000000,Heading,SD cards (Secure Digital Memory Cards)
 8523000000,Heading,"smart cards, with micro chips"
 8523000000,Heading,"swipe cards, magnetic"
 8523000000,Heading,"swipe card, with micro chip (smart card)"
@@ -5723,13 +5946,24 @@
 8523000000,Heading,video games on discs
 8523000000,Heading,video tapes - blank
 8523000000,Heading,video tapes - recorded
+8523210000,Commodity,credit cards
+8523210000,Commodity,gift card with magnetic strip
 8523210000,Subheading,software - magnetic media
 8523410000,Subheading,software - optical media
+8523510000,Subheading,flash drives
+8523510000,Subheading,memory sticks
+8523510000,Subheading,usb flash drives
+8523800000,Subheading,vinyl records
+8524000000,Heading,computer monitor
+8524000000,Heading,computer screen
+8524000000,Heading,"monitor, computer"
+8524000000,Heading,pc monitor
 8525000000,Heading,"broadcast, radio"
 8525000000,Heading,camcorders
 8525000000,Heading,cameras - digital
 8525000000,Heading,cameras - television
 8525000000,Heading,cameras - video
+8525000000,Heading,CCTV cameras
 8525000000,Heading,de-modulators - radio transmission
 8525000000,Heading,digital cameras
 8525000000,Heading,drones outfitted with video cameras
@@ -5894,7 +6128,6 @@
 8537000000,Heading,switchboards - other
 8537109899,Commodity,wheelchair joystick controllers
 8539000000,Heading,arc lamps
-8539000000,Heading,"bulbs, electric lamp"
 8539000000,Heading,"discharge lamps, i.e bulbs only"
 8539000000,Heading,filament and discharge lamps i.e. bulbs
 8539000000,Heading,fluorescent lamps 
@@ -5905,6 +6138,7 @@
 8539000000,Heading,lamps (bulbs and tubes) - discharge
 8539000000,Heading,lamps (bulbs and tubes) - electric filament
 8539000000,Heading,"lamps (bulbs, tubes)"
+8539000000,Heading,lightbulbs
 8539000000,Heading,mercury vapour and sodium vapour lamps
 8539000000,Heading,starters and discharge tubes
 8539000000,Heading,ultra violet lamps
@@ -6009,6 +6243,8 @@
 8543000000,Heading,"tapes - recorders, instrumentation"
 8543000000,Heading,"translators, language - without calculators"
 8543000000,Heading,video editing
+8543400000,Commodity,e cigarettes
+8543400000,Commodity,e-cigarettes
 8544000000,Heading,"appliances wire, electrical insulated"
 8544000000,Heading,"cables - electric, insulated"
 8544000000,Heading,cables - fitted with connectors
@@ -6019,12 +6255,16 @@
 8544000000,Heading,"cables - telecommunications, insulated"
 8544000000,Heading,co-axial cable
 8544000000,Heading,conductors
+8544000000,Heading,extension cables
+8544000000,Heading,extension leads
 8544000000,Heading,"insulated electric wire, cable, bars and strip"
 8544000000,Heading,"insulated wire, cable, bars, strips"
 8544000000,Heading,optical fibre cables
 8544000000,Heading,"winding wires and strip, electric, insulated"
 8544000000,Heading,wire - insulated - electric
 8544000000,Heading,"wire - insulated - winding, electric"
+8544420000,Subheading,ethernet cables
+8544420000,Subheading,hdmi cables
 8545000000,Heading,arc-lamp carbons
 8545000000,Heading,battery carbons
 8545000000,Heading,"brushes, carbon electrical"
@@ -6090,11 +6330,15 @@
 8703000000,Heading,golf buggies
 8703000000,Heading,mobility scooter
 8703000000,Heading,motor cars
+8703000000,Heading,motorhomes
 8703000000,Heading,motor vehicles - for transporting persons
 8703000000,Heading,pick up motor vehicles
 8703000000,Heading,"scooters, mobility"
 8703000000,Heading,station wagons and estate cards
-8703000000,Heading,winnebago
+8703000000,Heading,winnebagos
+8703100000,Subheading,golf buggy
+8703100000,Subheading,snowmobile
+8703101800,Commodity,mobility scooter
 8704000000,Heading,dumpers
 8704000000,Heading,dumptrucks
 8704000000,Heading,electric golf trolleys
@@ -6149,6 +6393,8 @@
 8708000000,Heading,shoe brakes
 8708000000,Heading,transmission parts for motor vehicles
 8708000000,Heading,wheels for motor vehicles
+8708100000,Subheading,car bumpers
+8708299000,Commodity,"roof rack, for car"
 8709000000,Heading,"platform trucks, not fitted with lifting or handling machinery"
 8709000000,Heading,shock absorbers
 8709000000,Heading,tractors - railway station platform type
@@ -6160,12 +6406,16 @@
 8710000000,Heading,"tanks, armoured fighting vehicles and parts"
 8710000000,Heading,"vehicles, armoured fighting and parts"
 8710000000,Heading,"vehicles, tank (armoured fighting)"
+8711000000,Heading,electric scooter
 8711000000,Heading,mopeds
 8711000000,Heading,motorbikes
 8711000000,Heading,motorcycles
 8711000000,Heading,motor scooters
 8711000000,Heading,"scooters, motor"
 8711000000,Heading,sidecars
+8711600000,Subheading,e-bikes
+8711600000,Subheading,electric bicycles
+8711600000,Subheading,electric bikes
 8712000000,Heading,"bicycles, children's"
 8712000000,Heading,bicycles other
 8712000000,Heading,"cycles, not motorised"
@@ -6173,9 +6423,14 @@
 8713000000,Heading,invalid carriages
 8713000000,Heading,wheelchairs
 8713000000,Heading,wheel chairs
+8714000000,Heading,bicycle accessories
+8714000000,Heading,bicycle parts
+8714000000,Heading,bike parts
 8714000000,Heading,calliper brakes
 8714000000,Heading,cycles not motorised parts
+8714000000,Heading,motorbike parts
 8714000000,Heading,motor cycle and side car parts and accessories
+8714000000,Heading,motorcycle parts
 8714000000,Heading,"motor scooters, parts and accessories"
 8714000000,Heading,motor vehicle parts and accessories - fuel tanks
 8714000000,Heading,motor vehicle parts and accessories - gearboxes
@@ -6183,12 +6438,15 @@
 8714000000,Heading,motor vehicle parts and accessories - shock absorbers
 8714000000,Heading,motor vehicle parts and accessories - wheels
 8714000000,Heading,shock absorbers
+8714920000,Subheading,bicycle wheels
 8715000000,Heading,baby carriages and parts
+8715000000,Heading,baby strollers
 8715000000,Heading,"carriages, baby and parts"
 8715000000,Heading,perambulators
 8715000000,Heading,prams - children's
 8715000000,Heading,push button switches
 8715000000,Heading,"push chairs, baby"
+8715000000,Heading,strollers
 8716000000,Heading,agricultural trailers and parts
 8716000000,Heading,"caravans, not mechanically propelled and parts"
 8716000000,Heading,carriages not mechanically propelled and parts
@@ -6214,6 +6472,7 @@
 8801000000,Heading,non powered aircraft
 8802000000,Heading,aeroplanes
 8802000000,Heading,aircraft
+8802000000,Heading,airplanes
 8802000000,Heading,amphibious vehicles - aircraft
 8802000000,Heading,"drones, racing and hobby"
 8802000000,Heading,helicopters
@@ -6277,6 +6536,7 @@
 8907000000,Heading,"landing stages, floating"
 8907000000,Heading,rafts
 8907000000,Heading,stages - floating
+8907100000,Commodity,"liferaft, inflatable"
 8908000000,Heading,ships for breaking up
 9000000000,Chapter,"continuous line graph recorders, electrical"
 9000000000,Chapter,instruments and apparatus - for testing equipment and material by electrical means
@@ -6304,6 +6564,8 @@
 9004000000,Heading,goggles
 9004000000,Heading,protective spectacles
 9004000000,Heading,spectacles
+9004100000,Subheading,sunglasses
+9004100000,Subheading,sun glasses
 9005000000,Heading,astronomical instruments
 9005000000,Heading,"binoculars, refracting "
 9005000000,Heading,infra-red night viewing binoculars
@@ -6432,6 +6694,8 @@
 9018000000,Heading,syringes
 9018000000,Heading,veterinary instruments and appliances
 9018410000,Subheading,"Abscess Needles, Dental"
+9018900000,Subheading,forceps
+9018900000,Subheading,oximeter
 9019000000,Heading,aerosol therapy apparatus
 9019000000,Heading,aptitude testing apparatus
 9019000000,Heading,breathing appliances
@@ -6538,6 +6802,7 @@
 9029000000,Heading,stroboscopes
 9029000000,Heading,tachometers
 9029000000,Heading,"taximeters, non electric"
+9029200000,Subheading,speedometer
 9030000000,Heading,ammeters
 9030000000,Heading,amperemeters
 9030000000,Heading,capacitance measuring bridges
@@ -6630,12 +6895,24 @@
 9201000000,Heading,"keyboard instruments - stringed, not elsewhere specified or included"
 9201000000,Heading,pianos
 9201000000,Heading,string musical instruments
-9202000000,Heading,guitars - non electric
 9202000000,Heading,harps
 9202000000,Heading,lyre
 9202000000,Heading,mandolin
 9202000000,Heading,string musical instruments
 9202000000,Heading,viola
+9202109000,Commodity,cellos
+9202109000,Commodity,double basses
+9202109000,Commodity,violas
+9202903000,Commodity,"guitars, acoustic"
+9202903000,Commodity,"guitars, non-electric"
+9202908000,Commodity,balalaikas
+9202908000,Commodity,banjos
+9202908000,Commodity,bouzoukis
+9202908000,Commodity,citterns
+9202908000,Commodity,lutes
+9202908000,Commodity,mandolins
+9202908000,Commodity,sitars
+9202908000,Commodity,ukeleles
 9205000000,Heading,accordions
 9205000000,Heading,bagpipes
 9205000000,Heading,clarinets
@@ -6646,11 +6923,12 @@
 9206000000,Heading,maracas
 9206000000,Heading,percussion musical instruments
 9206000000,Heading,xylophones
-9207000000,Heading,electric guitar
-9207000000,Heading,guitars - electric
 9207000000,Heading,"instruments and apparatus - rules - instruments, musical - electro-magnetic, electro-static and electronic"
 9207000000,Heading,"musical instruments, electromagnetic, electrostatic or electronic"
 9207000000,Heading,"organs, musical"
+9207901000,Commodity,"bass guitars, electric"
+9207901000,Commodity,electric guitars
+9207901000,Commodity,"guitars, electric"
 9208000000,Heading,fairground organs
 9208000000,Heading,musical boxes
 9208000000,Heading,rattles
@@ -6742,6 +7020,9 @@
 9402000000,Heading,rocking chairs
 9402000000,Heading,surgical furniture
 9402000000,Heading,veterinary furniture
+9402100000,Commodity,dentist's chair
+9402900000,Commodity,gurney
+9402900000,Commodity,stretcher
 9403000000,Heading,"advertising materials - display stands, floor standing"
 9403000000,Heading,altars
 9403000000,Heading,beds
@@ -6761,16 +7042,21 @@
 9403000000,Heading,dressers
 9403000000,Heading,easels
 9403000000,Heading,furniture
+9403000000,Heading,garden furniture
 9403000000,Heading,hammocks (furniture)
+9403000000,Heading,headboards
 9403000000,Heading,lockers (furniture)
 9403000000,Heading,needlework tables
 9403000000,Heading,office equipment and furniture (excluding chairs) of metal
+9403000000,Heading,outdoor furniture
 9403000000,Heading,play-pens
 9403000000,Heading,shelves and shelving (furniture) floor standing/wall mounted
 9403000000,Heading,"stand, floor-standing furniture"
 9403000000,Heading,storage bins and racks (floor-standing)
 9403000000,Heading,tables (furniture)
 9403000000,Heading,"trolleys, domestic (furniture)"
+9403200000,Subheading,"bed frames, metal"
+9403500000,Commodity,"bed frames, wood"
 9404000000,Heading,"bedding, stuffed or sprung, excluding bed linen"
 9404000000,Heading,"bedsprings, combination (mattress supports)"
 9404000000,Heading,"cellular rubber mattresses, cushions, pillows"
@@ -6784,8 +7070,11 @@
 9404000000,Heading,quilts (stuffed furnishings)
 9404000000,Heading,"springs, combination, mattress supports"
 9404000000,Heading,"springs, inner units for mattresses, etc)"
+9404210000,Subheading,mattresses
+9404909000,Commodity,weighted blanket
 9405000000,Heading,"candelabra, not precious metal or antique"
 9405000000,Heading,christmas tree lights
+9405000000,Heading,desk lamp
 9405000000,Heading,"diffusers, light"
 9405000000,Heading,"globe shades, glass"
 9405000000,Heading,lamps and lighting fittings
@@ -6796,9 +7085,14 @@
 9405000000,Heading,standard lamps
 9405000000,Heading,table lamps
 9405209100,Commodity,salt lamp
+9405210000,Subheading,bedside lamp
+9405219090,Commodity,Himalayan salt lamp
+9405219090,Commodity,salt lamp
+9405500000,Subheading,solar-powered lights
 9406000000,Heading,"building, pre-fabricated"
 9406000000,Heading,dwelling houses and other buildings prefabricated
 9406000000,Heading,"hangars, iron or steel"
+9406100000,Commodity,"sauna (pre-fabricated building, of wood)"
 9500000000,Chapter,"nets, sport (goal nets, tennis nets, fish nets, etc)"
 9500000000,Chapter,toys
 9503000000,Heading,abaci (abacus)
@@ -6808,6 +7102,7 @@
 9503000000,Heading,bats (toy)
 9503000000,Heading,chemistry set (toy)
 9503000000,Heading,"clubs, golf (toy)"
+9503000000,Heading,cuddly toy
 9503000000,Heading,darts toys
 9503000000,Heading,dolls
 9503000000,Heading,engines - miniature (not electric)
@@ -6815,13 +7110,16 @@
 9503000000,Heading,jigsaw puzzles
 9503000000,Heading,kites - professional stunt
 9503000000,Heading,kites - toys
+9503000000,Heading,latex balloons
 9503000000,Heading,lego
+9503000000,Heading,plush toy
 9503000000,Heading,puzzles
 9503000000,Heading,rattles
 9503000000,Heading,scooters (children only)
 9503000000,Heading,soft toys
 9503000000,Heading,teddy bears
 9503000000,Heading,wheeled toys
+9503002100,Subheading,action figures
 9503002190,Commodity,stuffed toy doll
 9504000000,Heading,amusement machines
 9504000000,Heading,bagatelle tablets
@@ -6836,6 +7134,8 @@
 9504000000,Heading,"video games, on cartridge"
 9504900000,Subheading,boardgames
 9504900000,Subheading,board games
+9504900000,Subheading,chess
+9504900000,Subheading,dartboard
 9505000000,Heading,advent calendars
 9505000000,Heading,christmas crackers
 9505000000,Heading,christmas stockings
@@ -6844,6 +7144,8 @@
 9505000000,Heading,"decorations, christmas tree (except lights)"
 9505000000,Heading,festive articles
 9505000000,Heading,"snow, imitation"
+9505100000,Subheading,"baubles, Christmas"
+9505900000,Commodity,party decorations
 9506000000,Heading,archery equipment
 9506000000,Heading,athletic equipment
 9506000000,Heading,balance beams (gymnastics)
@@ -6889,6 +7191,14 @@
 9506000000,Heading,surfboards
 9506000000,Heading,"table, table tennis"
 9506000000,Heading,"tennis requisites, except clothing"
+9506210000,Subheading,paddleboards
+9506699000,Commodity,baseballs
+9506910000,Subheading,barbells
+9506910000,Subheading,dumbbells
+9506910000,Subheading,exercise bikes
+9506910000,Subheading,gym equipment
+9506910000,Subheading,trampolines
+9506910000,Subheading,treadmills
 9507000000,Heading,butterfly nets
 9507000000,Heading,"decoys, game"
 9507000000,Heading,fish-hooks
@@ -6965,6 +7275,8 @@
 9608000000,Heading,pen nibs
 9608000000,Heading,pens
 9608000000,Heading,stylographic pens and parts
+9608100000,Subheading,ballpens
+9608100000,Subheading,ballpoint pens
 9609000000,Heading,advertising materials - drawing chalk and charcoals
 9609000000,Heading,"chalk, drawing, ect"
 9609000000,Heading,"charcoals, drawing"
@@ -6995,6 +7307,8 @@
 9614000000,Heading,powder puffs
 9615000000,Heading,"combs, hair"
 9615000000,Heading,"curling grips, iron or steel"
+9615000000,Heading,hair accessories
+9615000000,Heading,hair clips
 9615000000,Heading,"hair, other - slides, pins and curlers (non electric)"
 9616000000,Heading,chemical lighters
 9616000000,Heading,"scented sprays, empty"
@@ -7009,6 +7323,7 @@
 9700000000,Chapter,artwork
 9701000000,Heading,collages
 9701000000,Heading,"drawings, executed entirely by hand"
+9701000000,Heading,fine art
 9701000000,Heading,"paintings, hand"
 9701000000,Heading,"pastels, hand drawn"
 9702000000,Heading,art print

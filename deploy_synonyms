@@ -1,0 +1,9 @@
+clear
+
+echo "Copying synonyms"
+cd "../../7. OTT elastic/elk"
+./copy_synonyms
+
+echo "Reindexing"
+cd "../../1. Online Tariff/tariff-elastic"
+./es_index

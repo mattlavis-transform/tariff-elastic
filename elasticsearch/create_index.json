@@ -664,6 +664,30 @@
                         "type": "keyword"
                     }
                 }
+            },
+            "filter_weight": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_bovine_age_gender": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "filter_length": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             }
         }
     }

@@ -55,16 +55,15 @@ def cleanse(s, classification_class=None):
     if classification_class == "chapter":
         s = left(s, 1).upper() + right(s, len(s) - 1).lower()
 
-    s = s.replace("(", "")
-    s = s.replace(")", "")
+    # s = s.replace("(", "")
+    # s = s.replace(")", "")
     s = s.replace("“", '"')
     s = s.replace("”", '"')
     s = s.replace("‘", "'")
     s = s.replace("’", "'")
     s = s.replace(r'\\u00e9', "é")
-    s = s.strip("'")
-    s = s.strip('"')
-    s = s.strip(',')
+    s = s.replace("\u00a0", " ")
+    s = s.strip()
     return s
 
 

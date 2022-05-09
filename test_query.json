@@ -1,0 +1,52 @@
+{
+    "size": 2000,
+    "track_total_hits": true,
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "multi_match": {
+                        "query": "halibut",
+                        "fields": [
+                            "chapter^8",
+                            "search_references^6",
+                            "heading^4",
+                            "description.exact^2",
+                            "description",
+                            "goods_nomenclature_item_id",
+                            "xfriendly_name^1",
+                            "xdescription_alternative^15"
+                        ],
+                        "analyzer": "complex_synonyms",
+                        "type": "best_fields"
+                    }
+                }
+            ]
+        }
+    },
+    "suggest": {
+        "text": "halibut",
+        "did-you-mean": {
+            "phrase": {
+                "field": "description",
+                "real_word_error_likelihood": 0.95,
+                "max_errors": 1,
+                "confidence": 0,
+                "size": 5,
+                "collate": {
+                    "query": {
+                        "inline": {
+                            "match": {
+                                "": ""
+                            }
+                        }
+                    },
+                    "params": {
+                        "field_name": "description"
+                    },
+                    "prune": true
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,6 @@
+import re
 import os
+import sys
 import fileinput
 import csv
 import json
@@ -23,23 +25,23 @@ class Application(object):
         self.stopwords_file = os.path.join(os.getcwd(), "resources", os.getenv('STOPWORDS_FILE'))
         self.synonyms_file = os.path.join(os.getcwd(), "resources", os.getenv('SYNONYMS_FILE'))
         self.commodities_filename = os.path.join("resources", "ndjson", "commodities.ndjson")
-        self.metadata_folder = os.path.join(os.getcwd(), "resources", "meta")
 
+    def generate_es_corpus(self):
         self.load_synonyms()
         self.load_stopwords()
         self.get_search_references()
         self.get_friendly_names()
         self.get_facet_assignments()
-        self.get_metadata()
 
         self.load_commodity_code_data()
         self.inherit_assignments()
         self.apply_assignments_to_commodities()
         self.get_hierarchy_node()
-        self.get_others_staged()
-        # self.get_others()
+        self.get_siblings()
+        # self.get_others_staged()
+        self.get_others()
         self.process_data()
-        self.write_data()
+        self.write_commodities_ndjson_file()
         self.insert_blank_index_lines()
         self.complete()
 
@@ -156,6 +158,8 @@ class Application(object):
                                 self.synonyms_dict[term] = [term2]
 
     def load_commodity_code_data(self):
+        # Reads in all of the commodity codes from the specified CSV file
+        # In reality, this should come from the database
         print("Loading commodity code data")
         self.classifications = []
         self.classification_dict = {}
@@ -168,8 +172,7 @@ class Application(object):
                     self.classifications.append(classification)
                     self.classification_dict[classification.goods_nomenclature_item_id_plus_pls] = classification
                 line_count += 1
-        print(
-            f'- Complete: processes {line_count} lines of the goods classification.\n')
+        print(f'- Complete: processes {line_count} lines of the goods classification.\n')
 
     def get_hierarchy_node(self):
         for classification in self.classifications:
@@ -185,11 +188,104 @@ class Application(object):
                         "description": classification.hierarchy_dict[hierarchy_tier].description
                     }
                     classification.hierarchy_json.append(item)
-                    classification.hierarchy.append(
-                        classification.hierarchy_dict[hierarchy_tier].description)
+                    classification.hierarchy.append(classification.hierarchy_dict[hierarchy_tier].description)
+
+    def get_siblings(self):
+        classification_count = len(self.classifications)
+        self.parent_list = {}
+
+        for loop1 in range(0, classification_count - 1):
+            c1 = self.classifications[loop1]
+            for loop2 in range(loop1 + 1, classification_count):
+                c2 = self.classifications[loop2]
+                if c2.indent == c1.indent + 1:
+                    self.classifications[loop2].parent_sid = c1.sid
+                    self.classifications[loop2].parent_comm_code_plus_pls = c1.comm_code_plus_pls
+                    if c1.comm_code_plus_pls in self.parent_list:
+                        self.parent_list[c1.comm_code_plus_pls].append(c2.comm_code_plus_pls)
+                    else:
+                        self.parent_list[c1.comm_code_plus_pls] = [c2.comm_code_plus_pls]
+                elif c2.indent <= c1.indent:
+                    break
+
+        for classification in self.classifications:
+            if classification.parent_comm_code_plus_pls is not None:
+                for item in self.parent_list[classification.parent_comm_code_plus_pls]:
+                    if item != classification.comm_code_plus_pls:
+                        classification.siblings.append(item)
+
+    def lower_first(self, s):
+        ret = s[:1].lower() + s[1:]
+        return ret
 
     def get_others(self):
+        self.singles = []
+        self.multiples = []
         for classification in self.classifications:
+            classification.description_alternative = classification.description
+            if classification.comm_code_plus_pls == "0102219000_80":
+                a = 1
+            if len(classification.siblings) == 1:
+                if classification.description == "Other":
+                    classification.description_alternative = "Other than " + self.lower_first(self.classification_dict[classification.siblings[0]].description)
+                    self.singles.append({
+                        "key": classification.comm_code_plus_pls,
+                        "was": classification.description,
+                        "is": classification.description_alternative
+                    })
+            elif len(classification.siblings) > 1:
+                if classification.description == "Other":
+                    classification.description_alternative = self.classification_dict[classification.parent_comm_code_plus_pls].description_alternative
+                    alternatives = ""
+                    for sibling in classification.siblings:
+                        desc = self.classification_dict[sibling].description
+                        if "Heifers" in desc:
+                            a = 1
+                        desc = re.sub("\([^\)]+\)", "", desc)
+                        desc = desc.replace("  ", "").strip()
+                        alternatives += self.lower_first(desc) + " / "
+                    alternatives = alternatives.strip()
+                    alternatives = alternatives.strip("/")
+                    alternatives = alternatives.strip()
+
+                    classification.description_alternative += " (excluding {alternatives})".format(alternatives=alternatives)
+
+                    self.multiples.append({
+                        "key": classification.comm_code_plus_pls,
+                        "description": classification.description,
+                        "description_alternative": classification.description_alternative,
+                        "parent": self.classification_dict[classification.parent_comm_code_plus_pls].description_alternative,
+                        "sibling_count": len(classification.siblings)
+                    })
+
+        print("Generating a list of 'Others' that have just one sibling")
+        with open('single_siblings.csv', 'w',) as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Key', 'Was', 'Is'])
+            for item in self.singles:
+                writer.writerow(
+                    [item["key"],
+                     item["was"],
+                     item["is"]]
+                )
+
+        print("Generating a list of 'Others' that have just multiple siblings")
+        with open('multiple_siblings.csv', 'w',) as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Key', 'Description', 'Description alternative', 'Parent', 'Sibling count'])
+            for item in self.multiples:
+                writer.writerow(
+                    [item["key"],
+                     item["description"],
+                     item["description_alternative"],
+                     item["parent"],
+                     item["sibling_count"]]
+                )
+
+    def safe_get_others(self):
+        for classification in self.classifications:
+            if classification.goods_nomenclature_item_id == "0303895510":
+                a = 1
             classification.siblings.reverse()
             if "other" in classification.description.lower().strip() == "other":
                 sibling_count = len(classification.siblings)
@@ -286,10 +382,10 @@ class Application(object):
 
     def process_data(self):
         for classification in self.classifications:
-            classification.get_terms(self.stopwords, self.synonyms_dict)
+            # classification.get_terms(self.stopwords, self.synonyms_dict)
             classification.get_search_references(self.search_references_dict)
 
-    def write_data(self):
+    def write_commodities_ndjson_file(self):
         ndjson_list = []
         ndjson_list2 = []
         for classification in self.classifications:
@@ -325,9 +421,6 @@ class Application(object):
             f.write("\n")
         # Close the export file
         f.close()
-
-    def get_metadata(self):
-        a = 1
 
     def complete(self):
         print("Generation of commodities.ndjson complete")
