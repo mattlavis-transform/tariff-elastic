@@ -1,46 +1,62 @@
 {
-    "sid": 84864,
-    "goods_nomenclature_item_id": "2804690010",
-    "heading_id": "2804",
-    "chapter_id": "28",
+    "sid": 86232,
+    "goods_nomenclature_item_id": "8516797090",
+    "heading_id": "8516",
+    "chapter_id": "85",
     "productline_suffix": "80",
     "class": "commodity",
-    "description": "Consigned from the Republic of Korea",
-    "description_alternative": "Consigned from the Republic of Korea",
-    "friendly_name": "",
-    "chapter": "Inorganic chemicals; organic or inorganic compounds of precious metals, of rare-earth metals, of radioactive elements or of isotopes",
-    "heading": "Hydrogen, rare gases and other non-metals",
+    "description": "Other",
+    "description_indexed": "Other",
+    "description_friendly": "Other than ironing boards, including sleeve boards, whether or not free standing, with a steam soaking and/or heating top and/or blowing top",
+    "chapter": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles",
+    "heading": "Electric instantaneous or storage water heaters and immersion heaters; electric space-heating apparatus and soil-heating apparatus; electrothermic hairdressing apparatus (for example, hairdryers, hair curlers, curling tong heaters) and hand dryers; electric smoothing irons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545",
     "hierarchy": [
         {
-            "goods_nomenclature_item_id": "2804690000",
+            "sid": 49496,
+            "goods_nomenclature_item_id": "8500000000",
+            "productline_suffix": "80",
+            "class": "chapter",
+            "description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles"
+        },
+        {
+            "sid": 50001,
+            "goods_nomenclature_item_id": "8516000000",
+            "productline_suffix": "80",
+            "class": "heading",
+            "description": "Electric instantaneous or storage water heaters and immersion heaters; electric space-heating apparatus and soil-heating apparatus; electrothermic hairdressing apparatus (for example, hairdryers, hair curlers, curling tong heaters) and hand dryers; electric smoothing irons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545"
+        },
+        {
+            "sid": 50033,
+            "goods_nomenclature_item_id": "8516710000",
+            "productline_suffix": "10",
+            "class": "subheading",
+            "description": "Other electrothermic appliances"
+        },
+        {
+            "sid": 50036,
+            "goods_nomenclature_item_id": "8516790000",
             "productline_suffix": "80",
             "class": "subheading",
             "description": "Other"
         },
         {
-            "goods_nomenclature_item_id": "2804610000",
-            "productline_suffix": "10",
+            "sid": 78900,
+            "goods_nomenclature_item_id": "8516797000",
+            "productline_suffix": "80",
             "class": "subheading",
-            "description": "Silicon"
-        },
-        {
-            "goods_nomenclature_item_id": "2804000000",
-            "productline_suffix": "80",
-            "class": "heading",
-            "description": "Hydrogen, rare gases and other non-metals"
-        },
-        {
-            "goods_nomenclature_item_id": "2800000000",
-            "productline_suffix": "80",
-            "class": "chapter",
-            "description": "Inorganic chemicals; organic or inorganic compounds of precious metals, of rare-earth metals, of radioactive elements or of isotopes"
+            "description": "Other"
         }
     ],
     "search_references": [],
-    "validity_start_date": "2006-04-21",
+    "validity_start_date": "2006-11-01",
     "validity_end_date": "2099-12-31",
-    "ancestor_0": "Other",
-    "ancestor_1": "Silicon",
-    "ancestor_2": "Hydrogen, rare gases and other non-metals",
-    "ancestor_3": "Inorganic chemicals; organic or inorganic compounds of precious metals, of rare-earth metals, of radioactive elements or of isotopes"
+    "nouns": "",
+    "chunks": "",
+    "adjectives": "other",
+    "filter_entity": "electrical machinery",
+    "ancestor_0": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles",
+    "ancestor_1": "Electric instantaneous or storage water heaters and immersion heaters; electric space-heating apparatus and soil-heating apparatus; electrothermic hairdressing apparatus (for example, hairdryers, hair curlers, curling tong heaters) and hand dryers; electric smoothing irons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545",
+    "ancestor_2": "Other electrothermic appliances",
+    "ancestor_3": "Other",
+    "ancestor_4": "Other"
 }
