@@ -104,6 +104,12 @@
         ]
     },
     {
+        "leather": [
+            "leather",
+            "suede"
+        ]
+    },
+    {
         "aluminium": [
             "aluminium"
         ]
@@ -263,6 +269,25 @@
     {
         "bamboo": [
             "bamboo"
+        ]
+    },
+    {
+        "plastic": [
+            "plastic",
+            "plastics"
+        ]
+    },
+    {
+        "base metal": [
+            "base metal"
+        ]
+    },
+    {
+        "other": [
+            "9401390000",
+            "9401490000",
+            "9401590000",
+            "9401990000"
         ]
     }
 ]

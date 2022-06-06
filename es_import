@@ -4,11 +4,15 @@ echo "Copying synonyms"
 cd "../../7. OTT elastic/elk"
 ./copy_synonyms
 
-echo "Collecting latest taxonomy"
+echo "\nSTART - Collecting latest taxonomy"
 cd "../../1. Online Tariff/tariff-elastic"
 python3 create_facets.py
+echo "END - Collecting latest taxonomy\n"
 
-echo "Writing commodity code file"
+echo "\nSTART - Writing commodity code file"
 python3 generate_es_corpus.py
+echo "END - Writing commodity code file\n"
 
+echo "\nSTART - Re-generating index"
 ./es_index
+echo "COMPLETE - Re-generating index"

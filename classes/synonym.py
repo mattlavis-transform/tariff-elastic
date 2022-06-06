@@ -1,6 +1,3 @@
-import classes.globals as g
-
-
 class Synonym(object):
     def __init__(self, synonym_raw):
         self.raw = synonym_raw

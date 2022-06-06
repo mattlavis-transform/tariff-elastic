@@ -1,0 +1,22 @@
+{
+    "hyphenate": [
+        "guinea fowl",
+        "sea cucumber",
+        "sea urchin",
+        "bone in"
+    ],
+    "replace": [
+        {
+            "from": "car coat",
+            "to": "carcoat"
+        },
+        {
+            "from": "car-coat",
+            "to": "carcoat"
+        },
+        {
+            "from": "side-car",
+            "to": "sidecar"
+        }
+    ]
+}

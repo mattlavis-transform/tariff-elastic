@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import ndjson
 import openpyxl
@@ -32,9 +33,13 @@ class Taxonomiser:
         self.headings = []
         self.headings_dict = {}
 
+        self.commodity_minimum = os.getenv('COMMODITY_MINIMUM')
+        self.commodity_maximum = os.getenv('COMMODITY_MAXIMUM')
+
         print("\nCreating file {filename}\n".format(filename=self.ndjson_file))
 
-    def get_facets(self):
+    def get_facets_from_excel_source(self):
+        print("Getting facets from the source Excel spreadsheet")
         # Get the facets from the source Excel spreadsheet
         wb_obj = openpyxl.load_workbook(self.facet_source_file)
         sheet_facets = wb_obj["facets"]
@@ -44,14 +49,21 @@ class Taxonomiser:
         self.facets = []
         self.facets_dict = {}
         for i in range(2, max_row + 1):
+            field = sheet_facets.cell(row=i, column=1).value
+            display_name = sheet_facets.cell(row=i, column=2).value
+            question = "What is the " + display_name.lower() + "?" if sheet_facets.cell(row=i, column=3).value is None else sheet_facets.cell(row=i, column=3).value
+            info = sheet_facets.cell(row=i, column=4).value
+
             item = {
-                "field": sheet_facets.cell(row=i, column=1).value,
-                "display_name": sheet_facets.cell(row=i, column=2).value
+                "field": field,
+                "display_name": display_name,
+                "question": question,
+                "info": info
             }
             self.facets.append(item)
-            self.facets_dict[sheet_facets.cell(row=i, column=1).value] = sheet_facets.cell(row=i, column=2).value
+            self.facets_dict[field] = item
 
-        self.write_elasticsearch_template()
+        self.write_elasticsearch_indexing_json()
 
         # Get the headings
         sheet_headings = wb_obj["headings"]
@@ -70,8 +82,9 @@ class Taxonomiser:
             self.headings.append(h)
             self.headings_dict[h.id] = h.facets
         wb_obj = None
+        print("- Complete")
 
-    def write_elasticsearch_template(self):
+    def write_elasticsearch_indexing_json(self):
         # Read in the template
         f = open(self.es_settings_template_path, "r")
         data = json.load(f)
@@ -91,8 +104,9 @@ class Taxonomiser:
                 }
             }
             js_filter_data[facet] = {
-                "display": self.facets_dict[facet],
-                "level": "results"
+                "display_name": self.facets_dict[facet]["display_name"],
+                "question": self.facets_dict[facet]["question"],
+                "info": self.facets_dict[facet]["info"]
             }
 
         # Write out the master file with the facets included
@@ -113,10 +127,7 @@ class Taxonomiser:
         # service: this list is then used to act as the base for adding filters to the extracted
         # data JSON file
 
-        # commodity_min = "3000000000"
-        # commodity_max = "4000000000"
-        commodity_min = "0000000000"
-        commodity_max = "9999999999"
+        print("Taxonomiser - Getting commodities from CSV")
 
         with open(self.commodity_file) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
@@ -125,20 +136,24 @@ class Taxonomiser:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    c = Commodity(row)
-                    if c.goods_nomenclature_item_id > commodity_min and c.goods_nomenclature_item_id < commodity_max:
+                    if row[1] >= self.commodity_minimum and row[1] <= self.commodity_maximum:
+                        c = Commodity(row)
                         self.commodities.append(c)
                         line_count += 1
 
+        print("- Complete")
+
     def get_key_terms(self):
+        print("Getting key terms")
         for c in self.commodities:
             if c.number_indents > -1:
-                if c.heading == "0102":
-                    a = 1
                 if c.heading in self.headings_dict:
                     c.expand_facets(self.headings_dict[c.heading])
 
+        print("- Complete")
+
     def apply_commodity_hierarchy(self):
+        print("Applying commodity hierarchy")
         # In which the hierarchy of the classification in formed by
         # looping from the end to the start and finding each decrement
         # of the number of indents
@@ -156,9 +171,13 @@ class Taxonomiser:
                     break
 
         for c in self.commodities:
+            if c.goods_nomenclature_item_id == "8528420000":
+                a = 1
             c.inherit_facets()
+        print("- Complete")
 
     def save(self):
+        print("Saving facets file")
         # Write a test JSON to validate that the assignment of key terms is working
         self.json = {}
         self.filters = []
@@ -180,3 +199,4 @@ class Taxonomiser:
         ndjson_file = os.path.join(self.facets_export_folder, self.facet_export_file)
         with open(ndjson_file, 'w') as f:
             ndjson.dump(self.filters, f)
+        print("- Complete")

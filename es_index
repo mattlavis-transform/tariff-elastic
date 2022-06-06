@@ -1,4 +1,11 @@
+clear
+
+echo "Copying synonyms"
+cd "../../7. OTT elastic/elk"
+./copy_synonyms
+
 # Delete the index
+cd "/Users/mattlavis/sites and projects/1. Online Tariff/tariff-elastic"
 echo "Deleting elasticsearch index"
 curl -H 'Content-Type: application/json' -XDELETE 'http://localhost:9200/commodities'
 echo "\n"
@@ -10,7 +17,8 @@ echo "\n"
 
 # Import the commodities data
 echo "Importing commodities data"
-curl -H 'Content-Type: application/json' -XPOST 'localhost:9200/commodities/_doc/_bulk?pretty' --data-binary @resources/ndjson/commodities.ndjson
+curl -H 'Content-Type: application/json' -XPOST 'localhost:9200/commodities/_doc/_bulk?pretty' --data-binary @resources/ndjson/commodities1.ndjson
+curl -H 'Content-Type: application/json' -XPOST 'localhost:9200/commodities/_doc/_bulk?pretty' --data-binary @resources/ndjson/commodities2.ndjson
 echo "\n"
 
 # Count the results

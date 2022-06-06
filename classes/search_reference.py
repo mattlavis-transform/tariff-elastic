@@ -1,6 +1,3 @@
-import classes.globals as g
-
-
 class SearchReference(object):
     def __init__(self, item):
         self.title = item["attributes"]["title"]

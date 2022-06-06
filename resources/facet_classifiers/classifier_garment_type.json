@@ -54,13 +54,14 @@
     {
         "outerwear": [
             "coat",
-            "cloaks",
+            "cloak",
             "cape",
             "overcoat",
             "parka",
             "windcheater",
             "ski jacket",
-            "wind jacket"
+            "wind jacket",
+            "^coated"
         ]
     },
     {
@@ -93,6 +94,14 @@
             "hat",
             "cap",
             "headband"
+        ]
+    },
+    {
+        "gloves, mitts and mittens": [
+            "gloves",
+            "mitts",
+            "mittens",
+            "muffs"
         ]
     }
 ]

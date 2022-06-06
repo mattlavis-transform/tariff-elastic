@@ -10,8 +10,9 @@ from dotenv import load_dotenv
 from classes.classification import Classification
 from classes.search_reference import SearchReference
 from classes.synonym import Synonym
-import classes.globals as g
-
+import classes.functions as funcs
+import spacy
+from spacy.tokens import Doc
 
 class Application(object):
     def __init__(self):
@@ -24,21 +25,51 @@ class Application(object):
         self.dest_folder = os.path.join(os.getcwd(), "resources", "json")
         self.stopwords_file = os.path.join(os.getcwd(), "resources", os.getenv('STOPWORDS_FILE'))
         self.synonyms_file = os.path.join(os.getcwd(), "resources", os.getenv('SYNONYMS_FILE'))
-        self.commodities_filename = os.path.join("resources", "ndjson", "commodities.ndjson")
+        self.commodities_filename1 = os.path.join("resources", "ndjson", "commodities1.ndjson")
+        self.commodities_filename2 = os.path.join("resources", "ndjson", "commodities2.ndjson")
+
+        self.commodity_minimum = os.getenv('COMMODITY_MINIMUM')
+        self.commodity_maximum = os.getenv('COMMODITY_MAXIMUM')
+
+        self.load_spacy()
+
+    def load_spacy(self):
+        # self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("en_core_web_md")
+        self.introduce_tariff_pipeline()
+        a = 1
+
+    def introduce_tariff_pipeline(self):
+        self.initialise_attributes()
+        # Get the Spacy pattern data from the pattern file
+        filename = os.path.join(os.getcwd(), "resources", "patterns", "patterns.json")
+        f = open(filename)
+        self.spacy_patterns = json.load(f)
+        f.close()
+
+        ruler = self.nlp.add_pipe("entity_ruler", before="ner")
+        ruler.add_patterns(self.spacy_patterns)
+        # doc = nlp(text)
+        # for ent in doc.ents:
+        #     print(ent.text, ent.label_)
+
+    def initialise_attributes(self):
+        Doc.set_extension("age", default=None)
+        a = 1
 
     def generate_es_corpus(self):
         self.load_synonyms()
         self.load_stopwords()
         self.get_search_references()
-        self.get_friendly_names()
         self.get_facet_assignments()
-
         self.load_commodity_code_data()
-        self.inherit_assignments()
-        self.apply_assignments_to_commodities()
+        self.write_search_references()
+        self.inherit_facet_assignments()
+        self.apply_facet_assignments_to_commodities()
+        self.generate_indexed_description()
         self.get_hierarchy_node()
+        self.inherit_spacy_terms()
         self.get_siblings()
-        # self.get_others_staged()
         self.get_others()
         self.process_data()
         self.write_commodities_ndjson_file()
@@ -64,7 +95,7 @@ class Application(object):
         print("Getting stopwords")
         f = open(self.stopwords_file)
         self.stopwords = json.load(f)
-        g.stopwords = self.stopwords
+        self.stopwords = self.stopwords
         f.close()
         print("- Complete\n")
 
@@ -89,60 +120,71 @@ class Application(object):
                     self.search_references_dict[search_reference.goods_nomenclature_item_id] = [search_reference.title]
 
         self.search_references = sorted(self.search_references, key=lambda x: int(x.goods_nomenclature_item_id))
-        self.write_search_references()
         print("- Complete\n")
 
     def write_search_references(self):
         filename = os.path.join(os.getcwd(), "resources", "search_references.csv")
         f = open(filename, 'w')
         writer = csv.writer(f)
+        row = [
+            "goods_nomenclature_item_id",
+            "productline_suffix",
+            "referenced_class",
+            "title",
+            "indent"
+        ]
+        writer.writerow(row)
+
         for search_reference in self.search_references:
-            row = [search_reference.goods_nomenclature_item_id, search_reference.referenced_class, search_reference.title]
+            lookup = search_reference.goods_nomenclature_item_id + "_" + search_reference.productline_suffix
+            try:
+                search_reference.indent = self.classification_dict[lookup].indent
+            except Exception as e:
+                search_reference.indent = None
+
+            row = [
+                search_reference.goods_nomenclature_item_id,
+                search_reference.productline_suffix,
+                search_reference.referenced_class,
+                search_reference.title,
+                search_reference.indent
+            ]
             a = 1
             writer.writerow(row)
         f.close()
 
-    def apply_assignments_to_commodities(self):
-        print("Getting assigning facet assignments to commodities")
+    def apply_facet_assignments_to_commodities(self):
+        print("Assigning facet assignments to commodities")
         for c in self.classifications:
-            c.get_facet_assignments()
-        print("- Complete\n")
-
-    def get_friendly_names(self):
-        print("Getting friendly commodity code descriptions")
-        with open(self.friendly_descriptions_file) as f:
-            friendly_descriptions_data = ndjson.load(f)
-            g.friendly_names = {}
-            for item in friendly_descriptions_data:
-                g.friendly_names[item["heading"].ljust(10, "0")] = g.cleanse_friendly_name(item["description"])
-
+            c.get_facet_assignments(self.facet_assignments)
         print("- Complete\n")
 
     def get_facet_assignments(self):
         print("Getting facet assignments")
         with open(self.facets_export_file) as f:
             facet_assignments = ndjson.load(f)
-            g.facet_assignments = {}
+            self.facet_assignments = {}
             for item in facet_assignments:
                 sid = item["goods_nomenclature_sid"]
-                if sid in g.facet_assignments:
-                    g.facet_assignments[sid].append(item)
+                if sid in self.facet_assignments:
+                    self.facet_assignments[sid].append(item)
                 else:
-                    g.facet_assignments[sid] = [item]
+                    self.facet_assignments[sid] = [item]
         print("- Complete\n")
 
-    def inherit_assignments(self):
+    def inherit_facet_assignments(self):
         print("Inheriting down facet assignments")
         for i in range(0, len(self.classifications)):
             c = self.classifications[i]
-            if c.sid in g.facet_assignments:
+            if c.sid in self.facet_assignments:
                 for j in range(i + 1, len(self.classifications)):
                     c2 = self.classifications[j]
                     if c2.indent <= c.indent:
                         break
                     else:
-                        if c2.sid not in g.facet_assignments:
-                            g.facet_assignments[c2.sid] = g.facet_assignments[c.sid]
+                        if c2.sid not in self.facet_assignments:
+                            self.facet_assignments[c2.sid] = self.facet_assignments[c.sid]
+
         print("- Complete\n")
 
     def create_synonym_dictionary(self):
@@ -160,7 +202,8 @@ class Application(object):
     def load_commodity_code_data(self):
         # Reads in all of the commodity codes from the specified CSV file
         # In reality, this should come from the database
-        print("Loading commodity code data")
+
+        print("Reading commodity code data from CSV")
         self.classifications = []
         self.classification_dict = {}
         with open(self.commodity_file) as csv_file:
@@ -168,27 +211,40 @@ class Application(object):
             line_count = 0
             for row in csv_reader:
                 if line_count > 0:
-                    classification = Classification(row)
-                    self.classifications.append(classification)
-                    self.classification_dict[classification.goods_nomenclature_item_id_plus_pls] = classification
+                    goods_nomenclature_item_id = row[1]
+                    if goods_nomenclature_item_id >= self.commodity_minimum and goods_nomenclature_item_id <= self.commodity_maximum:
+                        classification = Classification(row, self.nlp)
+                        self.classifications.append(classification)
+                        self.classification_dict[classification.goods_nomenclature_item_id_plus_pls] = classification
                 line_count += 1
-        print(f'- Complete: processes {line_count} lines of the goods classification.\n')
+
+                # if line_count > 100:
+                #     break
+
+        print(f'- Complete: processed {line_count} lines of the goods classification.\n')
 
     def get_hierarchy_node(self):
         for classification in self.classifications:
+            if classification.goods_nomenclature_item_id == "9207101000":
+                a = 1
             classification.hierarchy_json = []
             if len(classification.hierarchy_dict) > 0:
                 for hierarchy_tier in classification.hierarchy_dict:
-                    classification.hierarchy_dict[hierarchy_tier].description = self.classification_dict[hierarchy_tier].description
+                    classification.hierarchy_dict[hierarchy_tier].sid = self.classification_dict[hierarchy_tier].sid
+                    classification.hierarchy_dict[hierarchy_tier].description_indexed = self.classification_dict[hierarchy_tier].description_indexed
                     classification.hierarchy_dict[hierarchy_tier].classification_class = self.classification_dict[hierarchy_tier].classification_class
                     item = {
+                        "sid": classification.hierarchy_dict[hierarchy_tier].sid,
                         "goods_nomenclature_item_id": classification.hierarchy_dict[hierarchy_tier].goods_nomenclature_item_id,
                         "productline_suffix": classification.hierarchy_dict[hierarchy_tier].productline_suffix,
                         "class": classification.hierarchy_dict[hierarchy_tier].classification_class,
-                        "description": classification.hierarchy_dict[hierarchy_tier].description
+                        "description": classification.hierarchy_dict[hierarchy_tier].description_indexed
                     }
                     classification.hierarchy_json.append(item)
-                    classification.hierarchy.append(classification.hierarchy_dict[hierarchy_tier].description)
+                    classification.hierarchy.append(classification.hierarchy_dict[hierarchy_tier].description_indexed)
+
+    def inherit_spacy_terms(self):
+        a = 1
 
     def get_siblings(self):
         classification_count = len(self.classifications)
@@ -218,24 +274,29 @@ class Application(object):
         ret = s[:1].lower() + s[1:]
         return ret
 
+    def generate_indexed_description(self):
+        for classification in self.classifications:
+            classification.generate_indexed_description()
+
     def get_others(self):
+        # Description is the verbatim
+        # Description_indexed is what gets indexed
+        # Description_friendly is this: not sure if it has a value yet
         self.singles = []
         self.multiples = []
         for classification in self.classifications:
-            classification.description_alternative = classification.description
-            if classification.comm_code_plus_pls == "0102219000_80":
-                a = 1
+            classification.description_friendly = classification.description
             if len(classification.siblings) == 1:
                 if classification.description == "Other":
-                    classification.description_alternative = "Other than " + self.lower_first(self.classification_dict[classification.siblings[0]].description)
+                    classification.description_friendly = "Other than " + self.lower_first(self.classification_dict[classification.siblings[0]].description)
                     self.singles.append({
                         "key": classification.comm_code_plus_pls,
                         "was": classification.description,
-                        "is": classification.description_alternative
+                        "is": classification.description_friendly
                     })
             elif len(classification.siblings) > 1:
                 if classification.description == "Other":
-                    classification.description_alternative = self.classification_dict[classification.parent_comm_code_plus_pls].description_alternative
+                    classification.description_friendly = self.classification_dict[classification.parent_comm_code_plus_pls].description_friendly
                     alternatives = ""
                     for sibling in classification.siblings:
                         desc = self.classification_dict[sibling].description
@@ -248,13 +309,13 @@ class Application(object):
                     alternatives = alternatives.strip("/")
                     alternatives = alternatives.strip()
 
-                    classification.description_alternative += " (excluding {alternatives})".format(alternatives=alternatives)
+                    classification.description_friendly += " (excluding {alternatives})".format(alternatives=alternatives)
 
                     self.multiples.append({
                         "key": classification.comm_code_plus_pls,
                         "description": classification.description,
-                        "description_alternative": classification.description_alternative,
-                        "parent": self.classification_dict[classification.parent_comm_code_plus_pls].description_alternative,
+                        "description_indexed": classification.description_indexed,
+                        "description_friendly": classification.description_friendly,
                         "sibling_count": len(classification.siblings)
                     })
 
@@ -277,150 +338,79 @@ class Application(object):
                 writer.writerow(
                     [item["key"],
                      item["description"],
-                     item["description_alternative"],
-                     item["parent"],
+                     item["description_indexed"],
                      item["sibling_count"]]
                 )
 
-    def safe_get_others(self):
-        for classification in self.classifications:
-            if classification.goods_nomenclature_item_id == "0303895510":
-                a = 1
-            classification.siblings.reverse()
-            if "other" in classification.description.lower().strip() == "other":
-                sibling_count = len(classification.siblings)
-                if sibling_count == 1:
-                    if "less than" in classification.siblings[0].lower():
-                        classification.description_alternative = classification.siblings[0].replace(
-                            "less than ", "") + " or more"
-                    elif " or " in classification.siblings[0].lower():
-                        classification.description_alternative = "Neither " + \
-                            g.decapitalize(
-                                classification.siblings[0].replace(" or ", " nor "))
-                    else:
-                        classification.description_alternative = "Not " + \
-                            g.decapitalize(classification.siblings[0])
-                elif sibling_count == 2:
-                    classification.description_alternative = "Neither "
-                    sibling_index = 0
-                    for sib in classification.siblings:
-                        sibling_index += 1
-                        if sibling_index > 1:
-                            if sibling_index == sibling_count:
-                                classification.description_alternative += " nor "
-                            else:
-                                classification.description_alternative += ", "
-                        classification.description_alternative += g.decapitalize(
-                            sib)
-                else:
-                    classification.description_alternative = "Not "
-                    sibling_index = 0
-                    for sib in classification.siblings:
-                        sibling_index += 1
-                        if sibling_index > 1:
-                            if sibling_index == sibling_count:
-                                classification.description_alternative += " or "
-                            else:
-                                classification.description_alternative += ", "
-                        classification.description_alternative += g.decapitalize(
-                            sib)
-
-    def get_others_staged(self):
-        for classification in self.classifications:
-            classification.description_alternative = classification.description
-        return
-        # Do this, looping through the hierarchy 1 by 1, starting at indent of subheadings
-        # (there are no others higher than that)
-        for indent in range(1, 13):
-            for classification in self.classifications:
-                if classification.indent == indent:
-                    # if "other" in classification.description.lower().strip(): # == "other":
-                    if classification.description.lower().strip() == "other":
-                        # Check for live horses, asses, mules and hinnies
-                        ret = classification.check_parent_of_other()
-                        if ret != "":
-                            classification.description_alternative = ret
-                        else:
-                            classification.siblings.reverse()
-                            sibling_count = len(classification.siblings)
-                            if sibling_count == 1:
-                                if "less than" in classification.siblings[0].lower():
-                                    classification.description_alternative = classification.siblings[0].replace(
-                                        "less than ", "") + " or more"
-                                elif " or " in classification.siblings[0].lower():
-                                    classification.description_alternative = "Neither " + \
-                                        g.decapitalize(
-                                            classification.siblings[0].replace(" or ", " nor "))
-                                else:
-                                    classification.description_alternative = "Not " + \
-                                        g.decapitalize(
-                                            classification.siblings[0])
-                            elif sibling_count == 2:
-                                classification.description_alternative = "Neither "
-                                sibling_index = 0
-                                for sib in classification.siblings:
-                                    sibling_index += 1
-                                    if sibling_index > 1:
-                                        if sibling_index == sibling_count:
-                                            classification.description_alternative += " nor "
-                                        else:
-                                            classification.description_alternative += ", "
-                                    classification.description_alternative += g.decapitalize(
-                                        sib)
-                            else:
-                                classification.description_alternative = "Not "
-                                sibling_index = 0
-                                for sib in classification.siblings:
-                                    sibling_index += 1
-                                    if sibling_index > 1:
-                                        if sibling_index == sibling_count:
-                                            classification.description_alternative += " or "
-                                        else:
-                                            classification.description_alternative += ", "
-                                    classification.description_alternative += g.decapitalize(
-                                        sib)
-
     def process_data(self):
         for classification in self.classifications:
-            # classification.get_terms(self.stopwords, self.synonyms_dict)
             classification.get_search_references(self.search_references_dict)
 
     def write_commodities_ndjson_file(self):
-        ndjson_list = []
+        ndjson_list1 = []
         ndjson_list2 = []
+        index = 0
+        classification_count = len(self.classifications)
         for classification in self.classifications:
+            index += 1
             classification.get_chapter_heading()
             classification.write(self.dest_folder)
-            ndjson_list.append(classification.json)
+            if index < classification_count / 2:
+                ndjson_list1.append(classification.json)
+            else:
+                ndjson_list2.append(classification.json)
 
-        for search_reference in self.search_references:
-            ndjson_list2.append(search_reference.json)
-
-        file_exists = os.path.exists(self.commodities_filename)
+        # Check if commodities filename 1 exists
+        file_exists = os.path.exists(self.commodities_filename1)
         if file_exists:
-            os.remove(self.commodities_filename)
+            os.remove(self.commodities_filename1)
 
-        with open(self.commodities_filename, 'w') as f:
+        # Check if commodities filename 2 exists
+        file_exists = os.path.exists(self.commodities_filename2)
+        if file_exists:
+            os.remove(self.commodities_filename2)
+
+        # Write the 1st file
+        with open(self.commodities_filename1, 'w') as f:
             f.write('\n')
-            ndjson.dump(ndjson_list, f)
-            if self.include_search_refs == 1:
-                f.write("\n")
-                ndjson.dump(ndjson_list2, f)
+            ndjson.dump(ndjson_list1, f)
+
+        # Write the 2nd file
+        with open(self.commodities_filename2, 'w') as f:
+            f.write('\n')
+            ndjson.dump(ndjson_list2, f)
 
     def insert_blank_index_lines(self):
         # The line { "index": {} } is needed between each genuine row in
         # the Elasticsearch import file
-        with fileinput.FileInput(self.commodities_filename, inplace=True, backup='.bak') as f:
+
+        with fileinput.FileInput(self.commodities_filename1, inplace=True, backup='.bak') as f:
             for line in f:
                 text_to_search = "\n"
                 replacement_text = '\n{ "index": {} }\n'
                 print(line.replace(text_to_search, replacement_text), end='')
         f.close()
         # Open up the same file, this time for writing to
-        with open(self.commodities_filename, 'a') as f:
+        with open(self.commodities_filename1, 'a') as f:
             f.write("\n")
         # Close the export file
         f.close()
+
+        with fileinput.FileInput(self.commodities_filename2, inplace=True, backup='.bak') as f:
+            for line in f:
+                text_to_search = "\n"
+                replacement_text = '\n{ "index": {} }\n'
+                print(line.replace(text_to_search, replacement_text), end='')
+        f.close()
+        # Open up the same file, this time for writing to
+        with open(self.commodities_filename2, 'a') as f:
+            f.write("\n")
+        # Close the export file
+        f.close()
+
+        # Delete the backups
+        os.remove(self.commodities_filename1 + ".bak")
+        os.remove(self.commodities_filename2 + ".bak")
 
     def complete(self):
         print("Generation of commodities.ndjson complete")

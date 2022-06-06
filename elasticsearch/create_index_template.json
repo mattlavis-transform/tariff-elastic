@@ -4,7 +4,11 @@
             "analysis": {
                 "analyzer": {
                     "complex_synonyms": {
-                        "tokenizer": "keyword",
+                        "tokenizer": "standard",
+                        "char_filter": [
+                            "html_strip",
+                            "standardise_quotes"
+                        ],
                         "filter": [
                             "stem_exclusions",
                             "asciifolding",
@@ -12,6 +16,7 @@
                             "english_stemmer",
                             "synonyms_drugs",
                             "synonyms_generic",
+                            "synonyms_genre_expansion",
                             "synonyms_trees",
                             "synonyms_food",
                             "synonyms_flowers",
@@ -21,13 +26,20 @@
                             "my_en_US_dict_stemmer"
                         ]
                     },
+                    "my_shingle_analyzer": {
+                        "type": "custom",
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase",
+                            "my_shingle_filter"
+                        ]
+                    },
                     "english_exact": {
                         "tokenizer": "standard",
                         "filter": [
                             "lowercase"
                         ]
                     },
-                    
                     "english": {
                         "tokenizer": "standard",
                         "filter": [
@@ -37,15 +49,15 @@
                             "english_stop",
                             "english_stemmer"
                         ]
-                    },
-                    "my_hunspell": {
-                        "tokenizer": "standard",
-                        "filter": [
-                            "my_en_US_dict_stemmer"
-                        ]
                     }
                 },
                 "filter": {
+                    "my_shingle_filter": {
+                        "type": "shingle",
+                        "min_shingle_size": 2,
+                        "max_shingle_size": 2,
+                        "output_unigrams": false
+                    },
                     "stem_exclusions": {
                         "type": "keyword_marker",
                         "keywords_path": "stem_exclusions.txt"
@@ -70,6 +82,12 @@
                     "synonyms_drugs": {
                         "type": "synonym",
                         "synonyms_path": "synonyms_drugs.txt",
+                        "ignore_case": true,
+                        "updateable": true
+                    },
+                    "synonyms_genre_expansion": {
+                        "type": "synonym",
+                        "synonyms_path": "synonyms_genre_expansion.txt",
                         "ignore_case": true,
                         "updateable": true
                     },
@@ -115,6 +133,18 @@
                         "ignore_case": true,
                         "updateable": true
                     }
+                },
+                "char_filter": {
+                    "standardise_quotes": {
+                        "type": "mapping",
+                        "mappings": [
+                            "\\u0091=>\\u0027",
+                            "\\u0092=>\\u0027",
+                            "\\u2018=>\\u0027",
+                            "\\u2019=>\\u0027",
+                            "\\u201B=>\\u0027"
+                        ]
+                    }
                 }
             }
         }
@@ -135,8 +165,52 @@
                     }
                 }
             },
-            "productline_suffix": {
+            "description": {
+                "analyzer": "english",
+                "type": "text",
+                "fields": {
+                    "exact": {
+                        "type": "text",
+                        "analyzer": "english_exact"
+                    },
+                    "shingles": {
+                        "type": "text",
+                        "analyzer": "my_shingle_analyzer"
+                    }
+                }
+            },
+            "description_indexed": {
+                "analyzer": "english",
                 "type": "text"
+            },
+            "search_references": {
+                "analyzer": "english",
+                "type": "text"
+            },
+            "hierarchy": {
+                "type": "nested",
+                "properties": {
+                    "goods_nomenclature_item_id": {
+                        "type": "text"
+                    },
+                    "productline_suffix": {
+                        "type": "text"
+                    },
+                    "class": {
+                        "type": "text"
+                    },
+                    "description": {
+                        "type": "text"
+                    }
+                }
+            },
+            "productline_suffix": {
+                "type": "text",
+                "fields": {
+                    "raw": {
+                        "type": "keyword"
+                    }
+                }
             },
             "validity_start_date": {
                 "type": "text"
@@ -212,33 +286,15 @@
                 "analyzer": "english",
                 "type": "text"
             },
-            "description": {
-                "analyzer": "english",
-                "type": "text",
-                "fields": {
-                    "exact": {
-                        "type": "text",
-                        "analyzer": "english_exact"
-                    }
-                }
-            },
-            "description_alternative": {
+            "nouns": {
                 "analyzer": "english",
                 "type": "text"
             },
-            "friendly_name": {
+            "adjectives": {
                 "analyzer": "english",
                 "type": "text"
             },
-            "search_references": {
-                "analyzer": "english",
-                "type": "text"
-            },
-            "terms": {
-                "analyzer": "english",
-                "type": "text"
-            },
-            "terms_hierarchy": {
+            "chunks": {
                 "analyzer": "english",
                 "type": "text"
             }

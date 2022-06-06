@@ -1,12 +1,12 @@
 [
     {
-        "knitted": [
-            "knitted"
+        "knitted or crocheted": [
+            "6100000000_80"
         ]
     },
     {
-        "crocheted": [
-            "crocheted"
+        "not knitted or crocheted": [
+            "6200000000_80"
         ]
     }
 ]
